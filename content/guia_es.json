@@ -1,0 +1,504 @@
+{
+  "meta": {
+    "titulo": "FERAL 1–60",
+    "subtitulo": "Druida tauren · Oso / Gato · 1–60",
+    "juego": "World of Warcraft: Forever",
+    "cliente_revisado": "1.60.1 (lanzamiento 4/11/2026 + hotfixes hasta 13/11/2026)",
+    "fecha_revision": "2026-11-15",
+    "version_contenido": "1.0.0"
+  },
+  "talentos": {
+    "validado_con": "Forever 1.60.1 · notas de desarrollo Blizzard (24/09–03/11/2026) + guía de leveo wofwforever (rev. 15/11/2026)",
+    "nota": "Filas exactas del árbol live no publicadas en texto: los requisitos de puntos (req) de talentos sin umbral oficial son orientativos.",
+    "arboles": {
+      "Combate feral": {
+        "Ferocity":             {"es": "Ferocidad",                "max": 5, "req": 0,  "certeza": "confirmado"},
+        "Feral Swiftness":      {"es": "Presteza feral",           "max": 2, "req": 5,  "certeza": "orientativo"},
+        "Furor":                {"es": "Furor",                    "max": 5, "req": 5,  "certeza": "orientativo"},
+        "Thick Hide":           {"es": "Pellejo grueso",           "max": 3, "req": 5,  "certeza": "orientativo"},
+        "Feral Charge":         {"es": "Carga feral",              "max": 1, "req": 10, "certeza": "confirmado"},
+        "Savage Fury":          {"es": "Furia salvaje",            "max": 2, "req": 10, "certeza": "orientativo"},
+        "Sharpened Claws":      {"es": "Garras afiladas",          "max": 2, "req": 10, "certeza": "orientativo"},
+        "Shredding Attacks":    {"es": "Ataques trituradores",     "max": 3, "req": 10, "certeza": "orientativo"},
+        "Feral Instinct":       {"es": "Instinto feral",           "max": 3, "req": 10, "certeza": "orientativo"},
+        "Lacerate":             {"es": "Lacerar",                  "max": 1, "req": 15, "certeza": "confirmado"},
+        "Predatory Discipline": {"es": "Disciplina depredadora",   "max": 1, "req": 15, "certeza": "confirmado"},
+        "Blood Frenzy":         {"es": "Frenesí sangriento",       "max": 2, "req": 15, "certeza": "orientativo", "prereq": ["Sharpened Claws", 2]},
+        "Predatory Strikes":    {"es": "Golpes depredadores",      "max": 3, "req": 15, "certeza": "orientativo"},
+        "Leader of the Pack":   {"es": "Líder de la manada",       "max": 1, "req": 20, "certeza": "confirmado"},
+        "Natural Instinct":     {"es": "Instinto natural",         "max": 2, "req": 20, "certeza": "orientativo"},
+        "Rend and Tear":        {"es": "Desgarrar y rasgar",       "max": 5, "req": 25, "certeza": "orientativo"},
+        "Natural Reaction":     {"es": "Reacción natural",         "max": 5, "req": 25, "certeza": "orientativo"},
+        "Shifting Power":       {"es": "Poder cambiante",          "max": 1, "req": 30, "certeza": "confirmado", "prereq": ["Shredding Attacks", 1]},
+        "Primal Bite":          {"es": "Mordisco primigenio",      "max": 1, "req": 30, "certeza": "confirmado", "prereq": ["Savage Fury", 2]},
+        "Improved Shifting Power": {"es": "Poder cambiante mejorado", "max": 2, "req": 30, "certeza": "orientativo", "prereq": ["Shifting Power", 1]}
+      },
+      "Restauración": {
+        "Heart of the Wild":    {"es": "Corazón de lo Salvaje",    "max": 5, "req": 0,  "certeza": "confirmado"},
+        "Naturalist":           {"es": "Naturalista",              "max": 5, "req": 0,  "certeza": "orientativo"},
+        "Natural Shapeshifter": {"es": "Cambiaformas natural",     "max": 3, "req": 5,  "certeza": "orientativo"}
+      }
+    },
+    "ruta": [
+      {"desde": 10, "hasta": 14, "arbol": "Combate feral", "talento": "Ferocity",          "funcion": "Abarata Zarpa, Magullar, Flagelo, Arañazo y Mordisco primigenio."},
+      {"desde": 15, "hasta": 16, "arbol": "Combate feral", "talento": "Feral Swiftness",   "funcion": "Velocidad en gato (también en interiores) + esquiva siempre."},
+      {"desde": 17, "hasta": 19, "arbol": "Combate feral", "talento": "Furor",             "funcion": "Recursos al cambiar de forma."},
+      {"desde": 20, "hasta": 20, "arbol": "Combate feral", "talento": "Feral Charge",      "funcion": "Carga en oso; en Forever también versión gato (TdR 30 s)."},
+      {"desde": 21, "hasta": 22, "arbol": "Combate feral", "talento": "Savage Fury",       "funcion": "Más daño de Zarpa, Arañazo, Magullar, Flagelo y Triturar. Prerrequisito de Mordisco primigenio."},
+      {"desde": 23, "hasta": 24, "arbol": "Combate feral", "talento": "Sharpened Claws",   "funcion": "Crítico en formas. Desbloquea Frenesí sangriento."},
+      {"desde": 25, "hasta": 25, "arbol": "Combate feral", "talento": "Lacerate",          "funcion": "Sangrado acumulable (5) con mucha amenaza. Clave para tanquear."},
+      {"desde": 26, "hasta": 27, "arbol": "Combate feral", "talento": "Blood Frenzy",      "funcion": "Ira/puntos de combo extra con críticos (fusión de Primal Fury + Blood Frenzy)."},
+      {"desde": 28, "hasta": 29, "arbol": "Combate feral", "talento": "Predatory Strikes", "funcion": "Más daño de crítico."},
+      {"desde": 30, "hasta": 30, "arbol": "Combate feral", "talento": "Leader of the Pack","funcion": "Aura de crítico al grupo (no se acumula con Moonkin)."},
+      {"desde": 31, "hasta": 31, "arbol": "Combate feral", "talento": "Predatory Strikes", "funcion": "Completa 3/3."},
+      {"desde": 32, "hasta": 33, "arbol": "Combate feral", "talento": "Natural Instinct",  "funcion": "Mejora defensiva/sigilo (antes Predatory Instincts)."},
+      {"desde": 34, "hasta": 34, "arbol": "Combate feral", "talento": "Shredding Attacks", "funcion": "Triturar y Lacerar más baratos. Abre Poder cambiante."},
+      {"desde": 35, "hasta": 39, "arbol": "Combate feral", "talento": "Rend and Tear",     "funcion": "+3/6/9/12/15 % daño cuerpo a cuerpo a objetivos sangrando (Arañazo, Destripar, Lacerar)."},
+      {"desde": 40, "hasta": 40, "arbol": "Combate feral", "talento": "Primal Bite",       "funcion": "Oso: 20 de ira, 100 % daño de arma + bonus, amenaza muy alta. Rangos 2 y 3 en instructor."},
+      {"desde": 41, "hasta": 41, "arbol": "Combate feral", "talento": "Shifting Power",    "funcion": "Gato: +40 de energía al instante a cambio de mucho maná."},
+      {"desde": 42, "hasta": 43, "arbol": "Combate feral", "talento": "Furor",             "funcion": "Furor 5/5: conservas energía de gato al entrar en oso."},
+      {"desde": 44, "hasta": 46, "arbol": "Combate feral", "talento": "Thick Hide",        "funcion": "Armadura en formas (rediseñado en Forever)."},
+      {"desde": 47, "hasta": 48, "arbol": "Combate feral", "talento": "Shredding Attacks", "funcion": "Completa 3/3."},
+      {"desde": 49, "hasta": 50, "arbol": "Combate feral", "talento": "Natural Reaction",  "funcion": "Oso: esquiva y 5 de ira al esquivar."},
+      {"desde": 51, "hasta": 55, "arbol": "Restauración",  "talento": "Heart of the Wild", "funcion": "Aguante en oso, fuerza/int (bonus reducido en Forever)."},
+      {"desde": 56, "hasta": 60, "arbol": "Restauración",  "talento": "Naturalist",        "funcion": "+2/4/6/8/10 % a TODO el daño (y curas)."}
+    ]
+  },
+  "tabs": [
+    {
+      "id": "inicio", "titulo": "Inicio",
+      "secciones": [
+        {"titulo": "Tu personaje", "bloques": [
+          {"tipo": "tarjeta", "campos": [
+            ["Raza / facción", "Tauren · Horda"],
+            ["Clase / rol", "Druida feral híbrido: **gato** (misiones, DPS) + **oso** (tanque con amigos)"],
+            ["Profesiones", "**Minería + Ingeniería** · secundarias: Primeros auxilios, Cocina (Pesca opcional)"],
+            ["Talentos", "**0 / 41 / 10** híbrido (ver pestaña Talentos)"]
+          ]},
+          {"tipo": "texto", "texto": "Regla rápida: **gato para misiones; oso para proteger al grupo; cúrate y usa control cuando el combate se tuerza.**"}
+        ]},
+        {"titulo": "Raciales tauren", "bloques": [
+          {"tipo": "lista", "items": [
+            "**Robustez** (Endurance): más vida. Valor exacto en Forever: orientativo (las raciales se actualizaron).",
+            "**Pisotón de guerra** (War Stomp): aturde en área. **Usable en formas** en Forever (confirmado). Ideal para huir o salvar al sanador."
+          ]}
+        ]},
+        {"titulo": "Hitos clave", "bloques": [
+          {"tipo": "tabla", "cabecera": ["Nv", "Qué"], "filas": [
+            ["10", "**Forma de oso** (misión de clase) · primer talento · Garras de la naturaleza (Nature's Grasp) base"],
+            ["12", "**Revivir** (Revive): resurrección fuera de combate, nueva"],
+            ["14", "Curar veneno (misión de clase, orientativo)"],
+            ["16", "**Forma acuática** (misión de clase, orientativo)"],
+            ["20", "**Forma felina** · **Presagio de claridad** (Omen of Clarity) ya es habilidad base"],
+            ["25", "**Lacerar** (talento) · primer punto de **Legado** (lo normal)"],
+            ["30", "Forma de viaje · Líder de la manada"],
+            ["40", "Oso nefasto · montura · **Especialización dual** · Mordisco primigenio"],
+            ["60", "Mazmorras finales y bandas (desde 9/12/2026)"]
+          ]},
+          {"tipo": "aviso", "estado": "orientativo", "texto": "La pasiva «Poised» (nv 32) del borrador no aparece en ninguna fuente oficial: no se incluye como hecho."}
+        ]},
+        {"titulo": "Reglas de oro", "bloques": [
+          {"tipo": "lista", "numerada": true, "items": [
+            "No te saltes el **oso al 10** ni el **gato al 20**.",
+            "Gato para subir; oso para mazmorras y emergencias.",
+            "Coge **Lacerar al 25** y mantén la amenaza en oso.",
+            "Mina **en ruta**; que Ingeniería no frene el leveo.",
+            "Reserva oro para la **montura del 40**.",
+            "Forever no es Classic Era: no sigas a ciegas guías antiguas.",
+            "Diviértete con el grupo: no hace falta BiS en cada nivel."
+          ]}
+        ]},
+        {"titulo": "Barras de acción (sugerencia)", "bloques": [
+          {"tipo": "tabla", "cabecera": ["Tecla", "Uso"], "filas": [
+            ["1", "Ataque principal (Triturar / Magullar)"], ["2", "Generador (Zarpa / Lacerar)"],
+            ["3", "Área / sangrado (Flagelo / Arañazo)"], ["4", "Control (Pisotón / Azote)"],
+            ["Q / E", "Oso / Gato"], ["R", "Bramido (provocar)"], ["F", "Carga feral"],
+            ["Mayús+1", "Consumible defensivo"], ["Mayús+2", "Defensivo fuerte (Piel de corteza)"]
+          ]},
+          {"tipo": "texto", "texto": "Solo ejemplos para tus barras del juego; el overlay **no captura teclas**."},
+          {"tipo": "texto", "texto": "Sesión de 2 h orientativa: 65 min misiones · 35 min mazmorra · 15 min profesiones · 5 min banco/instructor. Si están los amigos, prioriza jugar juntos."}
+        ]}
+      ]
+    },
+    {
+      "id": "ruta", "titulo": "Ruta",
+      "secciones": [
+        {"titulo": "Índice", "bloques": [{"tipo": "indice"}]},
+        {"titulo": "01–10 · Mulgore", "ancla": "r01", "bloques": [{"tipo": "tarjeta", "campos": [
+          ["Ruta", "Campamento Narache → Poblado Pezuña de Sangre (Bloodhoof)"],
+          ["Mazmorra", "—"],
+          ["Profesiones", "Aprende **Minería + Ingeniería** en cuanto puedas (Cima del Trueno / Orgrimmar). Cobre."],
+          ["Meta", "**Forma de oso al 10**. Bolsas."]]}]},
+        {"titulo": "10–15 · Mulgore → Los Baldíos", "ancla": "r10", "bloques": [{"tipo": "tarjeta", "campos": [
+          ["Ruta", "Termina Mulgore; **Los Baldíos** desde El Cruce. Orgrimmar para instructores."],
+          ["Alternativa", "Durotar (misiones sueltas), Ruinas de Lordaeron si vas a Tirisfal"],
+          ["Mazmorra", "Sima Ígnea (13–18)"],
+          ["Meta", "Facultades nuevas; minería ~65"]]}]},
+        {"titulo": "15–20 · Baldíos / Sierra Espolón", "ancla": "r15", "bloques": [{"tipo": "tarjeta", "campos": [
+          ["Ruta", "Los Baldíos (Trinquete) · alternativa **Sierra Espolón**"],
+          ["Mazmorra", "**Ruinas de Lordaeron** (15–20, sobre Entrañas: fácil para Horda) · Cuevas de los Lamentos (17–24)"],
+          ["Meta", "Minería ~65–100 · acuática al 16 · **gato al 20**"]]}]},
+        {"titulo": "20–25 · Vallefresno / Espolón", "ancla": "r20", "bloques": [{"tipo": "tarjeta", "campos": [
+          ["Ruta", "**Vallefresno** (Puesto del Hachazo), Sierra Espolón (Refugio Roca del Sol), sur de Los Baldíos"],
+          ["Mazmorra", "Castillo de Colmillo Oscuro (22–30), Cavernas de Brazanegra (24–32)"],
+          ["Meta", "**Lacerar al 25** · minería 100–125"]]}]},
+        {"titulo": "25–30 · Mil Agujas / Trabalomas", "ancla": "r25", "bloques": [{"tipo": "tarjeta", "campos": [
+          ["Ruta", "**Las Mil Agujas** (Poblado Viento Libre) · **Laderas de Trabalomas** (Molino Tarren)"],
+          ["Mazmorra", "**Excavación** (Excavation Site, 24–29, Los Humedales) · **Ciudad de Dalaran** (28–33, requiere sintonización) · Horado Rajacieno (29–38)"],
+          ["Dalaran (Horda)", "En Molino Tarren: **Magus Wordeen Voidglare** → «Key to the City» y «Prison Break-In»."],
+          ["Meta", "Legado (primer punto) · forma de viaje al 30"]]}]},
+        {"titulo": "30–35 · Desolace / Tuercespina", "ancla": "r30", "bloques": [{"tipo": "tarjeta", "campos": [
+          ["Ruta", "**Desolace** (Aldea Cazasombras), Desierto de Sal de Mil Agujas, norte de **Vega de Tuercespina**"],
+          ["Alternativa", "**Shen'dralas** (zona nueva entre Mulgore y Desolace; nivel orientativo)"],
+          ["Mazmorra", "Monasterio Escarlata (alas según nivel, 30–45)"],
+          ["Meta", "Minería ~150–175"]]}]},
+        {"titulo": "35–40 · Tuercespina / Riverglades", "ancla": "r35", "bloques": [{"tipo": "tarjeta", "campos": [
+          ["Ruta", "Vega de Tuercespina (Grom'gol), **The Riverglades** (zona nueva, 150+ misiones, ~35–45), Marjal Revolcafango"],
+          ["Mazmorra", "**Ciudad Anegada** (The Drowned City, 35–40, costa al oeste de Grom'gol) · Zahúrda Rajacieno (37–46)"],
+          ["Meta", "**Ahorrar para montura** · oso nefasto al 40"]]}]},
+        {"titulo": "40–45 · Tanaris / Feralas / Riverglades", "ancla": "r40", "bloques": [{"tipo": "tarjeta", "campos": [
+          ["Ruta", "Tanaris (Gadgetzan), Feralas (Campamento Mojache), resto de Riverglades"],
+          ["Mazmorra", "**Bastión Krol'dok** (40–45, Riverglades) · Uldaman (41–51)"],
+          ["Meta", "Especialización dual · minería hacia mithril"]]}]},
+        {"titulo": "45–50 · Interior / Garganta", "ancla": "r45", "bloques": [{"tipo": "tarjeta", "campos": [
+          ["Ruta", "Tanaris, Feralas, **Tierras del Interior** (Poblado Sañadiente), La Garganta de Fuego"],
+          ["Mazmorra", "Zul'Farrak (44–54), Maraudon (46–55)"],
+          ["Meta", "Mithril, veraplata, primer torio"]]}]},
+        {"titulo": "50–55 · Un'Goro / Frondavil", "ancla": "r50", "bloques": [{"tipo": "tarjeta", "campos": [
+          ["Ruta", "Cráter de Un'Goro, Frondavil, Tierras de la Peste del Oeste, Azshara"],
+          ["Mazmorra", "**Prisión de Alcaz** (48–53, Marjal Revolcafango) · Templo de Atal'Hakkar (50–56) · Profundidades de Roca Negra (52–60)"],
+          ["Meta", "Torio · Ingeniería alta · mejor equipo"]]}]},
+        {"titulo": "55–60 · Cuna / Peste / Silithus", "ancla": "r55", "bloques": [{"tipo": "tarjeta", "campos": [
+          ["Ruta", "Cuna del Invierno, Tierras de la Peste del Este, Silithus, cadenas pendientes; Monte Hyjal (zona nueva, nivel alto)"],
+          ["Mazmorra", "**Bastión Faucenegra** (Blackmaw Hold, 55–60, Azshara) · **Bancal del Modelador** (Shaper's Terrace, 58–60, Un'Goro) · Cumbre de Roca Negra, Stratholme, Scholomance, La Masacre"],
+          ["Meta", "Profesiones a 300 · equipo de 60"]]}]},
+        {"titulo": "Plan antibloqueos", "bloques": [
+          {"tipo": "lista", "numerada": true, "items": [
+            "Misiones amarillas y verdes agrupadas por zona.",
+            "¿Se acaban? Zona alternativa del mismo tramo.",
+            "Junta todas las misiones de una mazmorra y ve con amigos.",
+            "Mina y sube Ingeniería mientras viajas.",
+            "Si falta XP: enemigos 1–2 niveles por debajo que den material útil."
+          ]},
+          {"tipo": "aviso", "estado": "orientativo", "texto": "XP de mazmorras: el «+50 %» del borrador no es exacto. Hotfix del 8/11/2026: la XP por muerte en mazmorra subió del **40 % al 60 %** del valor de Classic Era (fuente: Blizzard vía prensa; comprobar hotfixes posteriores)."},
+          {"tipo": "texto", "texto": "Niveles de mazmorras clásicas: rangos de referencia de Classic, orientativos. Mazmorras nuevas: rangos oficiales de Blizzard (20/10/2026)."}
+        ]}
+      ]
+    },
+    {
+      "id": "talentos", "titulo": "Talentos",
+      "secciones": [
+        {"titulo": "Build híbrida 0 / 41 / 10", "bloques": [
+          {"tipo": "texto", "texto": "Un solo árbol para **gato y oso** sin resetear. Los talentos empiezan al **nivel 10** (1 punto por nivel: **51** al 60). Se cambian en el instructor de clase."},
+          {"tipo": "talentos"},
+          {"tipo": "aviso", "estado": "orientativo", "texto": "Validado contra datos de nov. 2026, pero Blizzard no publica las filas del árbol en texto. Comprueba en el calculador de Wowhead Forever si un talento sale bloqueado."}
+        ]},
+        {"titulo": "Cambios frente al borrador", "bloques": [
+          {"tipo": "lista", "items": [
+            "**Furor** está en el árbol **Feral** en el lanzamiento (se intercambió con Corazón de lo Salvaje, que pasó a Restauración).",
+            "**Mordisco primigenio** pasa al **40** (umbral de 31 puntos) y **Poder cambiante** al 41; antes del 40 ninguno es legal.",
+            "Se quita **Disciplina depredadora** (solo gato) para tener Lacerar en el único hueco de 16 puntos (nv 25).",
+            "**Instinto feral** se omite: en Forever ya no da amenaza en oso (solo daño de Flagelo y sigilo).",
+            "**Reacción natural** queda en 2/5 al 49–50 (era 1/5 al 60).",
+            "**Pellejo grueso** pasa de 52–54 a 44–46 (armadura en oso antes de las mazmorras de 45+).",
+            "El reparto final se mantiene en **0 / 41 / 10 = 51 puntos**."
+          ]}
+        ]},
+        {"titulo": "Variantes", "bloques": [
+          {"tipo": "lista", "items": [
+            "**Más gato** (si casi nunca tanqueas): cambia Lacerar (25) por **Disciplina depredadora** y Reacción natural (49–50) por más puntos en Mejora de Poder cambiante o Cambiaformas natural.",
+            "**Más oso**: Reacción natural 5/5 al 35–39 en vez de Desgarrar y rasgar (pierdes daño de gato).",
+            "Ventaja de Legado **Talented**: permite tener puntos de talento hasta **5 niveles antes**."
+          ]}
+        ]},
+        {"titulo": "Ya NO existen / cambiaron", "bloques": [
+          {"tipo": "lista", "items": [
+            "**Furia del tigre** (Tiger's Fury): eliminada → la sustituye Poder cambiante.",
+            "**Rabiar** (Berserk): eliminado (3/11/2026); su hueco lo ocupa Mordisco primigenio.",
+            "**Fuego feérico (feral)**: el talento desaparece; **Fuego feérico** se puede lanzar en formas sin coste, TdR 6 s.",
+            "**Presagio de claridad**: habilidad base al 20.",
+            "**Lacerar**: talento feral (nv 25); rangos superiores en instructor al 34, 42, 50 y 58."
+          ]}
+        ]}
+      ]
+    },
+    {
+      "id": "combate", "titulo": "Combate",
+      "secciones": [
+        {"titulo": "Gato · solo / DPS", "bloques": [
+          {"tipo": "lista", "items": [
+            "Antes del 20: oso + hechizos. Desde el 20: **gato** para misiones.",
+            "Abre en **sigilo** si compensa: **Triturar** (Shred) por la espalda; si no, **Zarpa** (Claw).",
+            "**Arañazo** (Rake) solo en enemigos que vivan bastante; escala con poder de ataque.",
+            "5 puntos: **Destripar** (Rip) si el enemigo dura; **Mordedura feroz** (Ferocious Bite) para rematar.",
+            "Desde el 41: **Poder cambiante** (+40 energía) solo si te queda maná para curarte.",
+            "Con **Furor 5/5** la energía de gato se regenera fuera de gato; al entrar en oso la pierdes."
+          ]},
+          {"tipo": "aviso", "estado": "confirmado", "texto": "Zarpa y Triturar suben mucho de daño; Arañazo y Flagelo escalan con PA. **Furia del tigre no existe.**"}
+        ]},
+        {"titulo": "Oso · un objetivo / jefe", "bloques": [
+          {"tipo": "lista", "items": [
+            "Entra con **Carga feral** o **Fuego feérico** (gratis en forma, TdR 6 s).",
+            "Amenaza: **Magullar** (Maul) + **Lacerar** hasta 5 acumulaciones; desde el 40 **Mordisco primigenio** (20 ira, amenaza muy alta).",
+            "**Bramido** (Growl) solo para recuperar un enemigo (TdR igual que Provocar de guerrero).",
+            "**Regeneración frenética**: cura el 100 % de la vida máxima con ira suficiente.",
+            "**Piel de corteza** (Barkskin) se puede usar en forma.",
+            "Druida **no tiene interrupción ni silencio**: usa Azote (Bash) y Pisotón de guerra como control."
+          ]}
+        ]},
+        {"titulo": "Oso · varios enemigos", "bloques": [
+          {"tipo": "lista", "items": [
+            "Marca objetivo principal; agrupa a los enemigos frente a ti.",
+            "**Flagelo** (Swipe): golpea hasta 3 objetivos y escala con PA.",
+            "**Rugido desmoralizador**: ya incluye la mejora (≈ Grito desmoralizador de guerrero; igual al 60).",
+            "Reparte Lacerar en los peligrosos; Bramido al que va al sanador.",
+            "Pide al grupo que traiga a los sueltos hacia ti."
+          ]}
+        ]},
+        {"titulo": "Apoyo fuera de forma", "bloques": [
+          {"tipo": "lista", "items": [
+            "Tras un combate duro: **Recrecimiento** (Regrowth, ahora más barato) o **Toque de sanación**; vuelve a feral.",
+            "Mantén **Marca de lo Salvaje** (mejora ya incluida de base) y **Espinas**.",
+            "**Renacer** (Rebirth) en combate; **Revivir** fuera de combate (nv 12).",
+            "**Garras de la naturaleza** (Nature's Grasp): base al 10, usable en forma e interiores.",
+            "Vigila maná, ira, energía y puntos de combo."
+          ]},
+          {"tipo": "aviso", "estado": "confirmado", "texto": "En Forever casi todas las **pociones y consumibles se usan en forma** sin salir de ella (incluidas pociones de ira y Té de cardo). Excepción: **la mayoría de bombas de Ingeniería**."}
+        ]}
+      ]
+    },
+    {
+      "id": "mazmorras", "titulo": "Mazmorras",
+      "secciones": [
+        {"titulo": "Orden por niveles", "bloques": [
+          {"tipo": "tabla", "cabecera": ["Nv", "Mazmorra", "Nota"], "filas": [
+            ["13–18", "Sima Ígnea", "Orgrimmar; primer grupo como oso"],
+            ["13–18", "Sala de los Thanes", "Nueva · bajo Forjaz: territorio Alianza, poco práctica"],
+            ["15–20", "**Ruinas de Lordaeron**", "Nueva · sobre Entrañas, fácil para Horda"],
+            ["17–24", "Cuevas de los Lamentos", "Los Baldíos"],
+            ["22–30", "Castillo de Colmillo Oscuro", "Bosque de Argénteos"],
+            ["24–29", "**Excavación**", "Nueva · Los Humedales (Roca Thelgen). Suelta plano de Rock Garden"],
+            ["24–32", "Cavernas de Brazanegra", "Vallefresno"],
+            ["28–33", "**Ciudad de Dalaran**", "Nueva · sintonización en Molino Tarren"],
+            ["29–38", "Horado Rajacieno", "Los Baldíos sur"],
+            ["30–45", "Monasterio Escarlata", "4 alas"],
+            ["35–40", "**Ciudad Anegada**", "Nueva (The Drowned City) · oeste de Grom'gol"],
+            ["37–46", "Zahúrda Rajacieno", ""],
+            ["40–45", "**Bastión Krol'dok**", "Nueva · The Riverglades"],
+            ["41–51", "Uldaman", "Tierras Inhóspitas"],
+            ["44–54", "Zul'Farrak", "Tanaris"],
+            ["46–55", "Maraudon", "Desolace"],
+            ["48–53", "**Prisión de Alcaz**", "Nueva · isla de Alcaz, Marjal Revolcafango"],
+            ["50–56", "Templo de Atal'Hakkar", "Pantano de las Penas"],
+            ["52–60", "Profundidades de Roca Negra", ""],
+            ["55–60", "**Bastión Faucenegra**", "Nueva (Blackmaw Hold) · Azshara"],
+            ["58–60", "**Bancal del Modelador**", "Nueva (Shaper's Terrace) · Un'Goro; requiere cristales de poder"]
+          ]},
+          {"tipo": "aviso", "estado": "orientativo", "texto": "Corregido: no existe «La Ciudad Sumergida» (es la Ciudad Anegada / Drowned City), ni «Bancal del Creador» (es Shaper's Terrace). Nombres en español de las mazmorras nuevas: traducción propia. Rangos de mazmorras clásicas: referencia de Classic."}
+        ]},
+        {"titulo": "Consejos de tanque", "bloques": [
+          {"tipo": "lista", "items": [
+            "Marca el objetivo prioritario y pide foco al DPS.",
+            "No tires si el sanador está sin maná.",
+            "Enemigos delante de ti y lejos del sanador.",
+            "Ojo a patrullas, lanzadores y los que huyen a pedir ayuda.",
+            "Amenaza y seguridad antes que velocidad.",
+            "Si hay otro tanque, entra en gato pero lleva **2–3 piezas de aguante** para cambiar.",
+            "Primera visita: no entres con el nivel mínimo justo."
+          ]}
+        ]}
+      ]
+    },
+    {
+      "id": "profesiones", "titulo": "Profesiones",
+      "secciones": [
+        {"titulo": "Minería 1–300", "bloques": [
+          {"tipo": "texto", "texto": "Activa **Buscar minerales** y lleva **Pico de minero**. Mina en ruta; sesiones cortas de granja solo si falta material."},
+          {"tipo": "tabla", "cabecera": ["Hab.", "Mineral", "Dónde"], "filas": [
+            ["1–65", "Cobre", "Mulgore, Los Baldíos, Durotar"],
+            ["65–125", "Estaño (plata ~75)", "Baldíos, Sierra Espolón, Vallefresno, Mil Agujas"],
+            ["125–175", "Hierro (oro ~155)", "Mil Agujas, Trabalomas, Arathi, Tuercespina"],
+            ["175–230", "Mithril", "Desolace, Tanaris, Feralas, Tierras Inhóspitas"],
+            ["230–245", "Mithril + veraplata", "Tanaris, Tierras del Interior, Garganta de Fuego"],
+            ["245–275", "Torio pequeño", "Un'Goro, Azshara, Cuna del Invierno"],
+            ["275–300", "Torio rico", "Cuna del Invierno, Estepas Ardientes, Peste del Este"]
+          ]},
+          {"tipo": "tabla", "cabecera": ["Nivel PJ", "Minería"], "filas": [
+            ["15", "65+"], ["25", "125+"], ["35", "175+"], ["45", "230+"], ["55", "275+"], ["60", "300"]
+          ]},
+          {"tipo": "lista", "items": [
+            "Guarda piedras **bastas, burdas, pesadas, sólidas y densas** (pólvoras de Ingeniería).",
+            "Reserva cobre, estaño, hierro, mithril y torio; **bronce = cobre + estaño**.",
+            "Compara precio de mena vs. barra antes de vender.",
+            "Instructor para subir tope: 75 / 150 / 225 (referencia Classic, orientativo)."
+          ]},
+          {"tipo": "aviso", "estado": "orientativo", "texto": "Habilidades por veta: valores de Classic; Forever añade recursos «escasos» (ver Legado: Bountiful Harvest)."}
+        ]},
+        {"titulo": "Ingeniería 1–300", "bloques": [
+          {"tipo": "tabla", "cabecera": ["Hab.", "Fabricar", "Material"], "filas": [
+            ["1–30", "Pólvora basta", "Piedra basta"],
+            ["30–50", "Puñado de tornillos de cobre", "Cobre"],
+            ["50–75", "Tubo de cobre / bomba de cobre", "Cobre, piedra basta, lino"],
+            ["75–100", "Pólvora burda, dinamita", "Piedra burda"],
+            ["100–125", "Tubos de bronce", "Bronce"],
+            ["125–150", "Artilugio giratorio de bronce, pólvora pesada", "Bronce, piedra pesada"],
+            ["150–175", "Estructura de bronce, piezas de hierro", "Bronce, hierro"],
+            ["175–200", "Granada de hierro, pólvora sólida", "Hierro, piedra sólida"],
+            ["200–225", "Tubo de mithril, disparador inestable", "Mithril"],
+            ["225–250", "Carcasa de mithril", "Mithril"],
+            ["250–275", "Pólvora densa, artilugio de torio", "Piedra densa, torio"],
+            ["275–300", "Piezas/munición de torio", "Torio, piedra densa"]
+          ]},
+          {"tipo": "lista", "items": [
+            "Fabrica y guarda la **Llave de tuercas arcoluz**.",
+            "**La mayoría de bombas NO se usan en forma.** Recetas nuevas que sí: familias **SAF-T** y **EZ-Thro**.",
+            "Gnómica vs. goblin (~200 de habilidad, orientativo): compara utilidad; no elijas por un supuesto extra en oso.",
+            "**Durotar Supply and Logistics**: entregas de cajas y ventaja de Legado «Performance» (Merchant's Favor).",
+            "No gastes el oro de la montura en recetas superfluas."
+          ]},
+          {"tipo": "aviso", "estado": "orientativo", "texto": "Recetas y umbrales: ruta de referencia Classic; confirma colores en el cliente."}
+        ]},
+        {"titulo": "Acampadas", "bloques": [
+          {"tipo": "texto", "texto": "Se basan en la **Fogata básica** (Cocina 1). Cada jugador aporta **1 objeto**; caben **3** (fogata básica), **5** (oficial, Cocina 90 + plano) o **10** (experta, Cocina 200/220 + plano). Siéntate o fabrica **1 min** junto al fuego → «Camp Benefits» durante 1 h. Los objetos comparten **1 h** de reutilización."},
+          {"tipo": "tabla", "cabecera": ["Hab.", "Objeto", "Efecto / origen"], "filas": [
+            ["Min 20", "**Piedra imantada** (Lodestone)", "Poder de ataque cuerpo a cuerpo · no se acumula con Bendición de poderío"],
+            ["Min 140", "**Jardín de rocas** (Rock Garden)", "Genera un nodo de mineral + beneficio de Lodestone · plano: Relic Guardian (Excavación)"],
+            ["Min 300", "**Fundición fundida** (Molten Foundry)", "Necesaria para Fundir torio pesado · origen del plano desconocido"],
+            ["Ing 20", "**Robot de componentes** (Reagent Bot)", "Vende reactivos de clase y de profesión a todo el campamento"],
+            ["Ing 140", "**Robot reparador** (Repair Bot)", "Reparaciones · plano: Sneed (Minas de la Muerte)"],
+            ["Ing 300", "**Banco anarquista** (Anarchist's Workbench)", "Estación para algunas recetas · NO vende reactivos"],
+            ["PA 20", "Botiquín (First Aid Kit)", "+3–56 aguante · excluye Palabra de poder: entereza"],
+            ["Pesca 20", "Pecera (Fishing Bowl)", "+8 % estadísticas · excluye Bendición de reyes"]
+          ]},
+          {"tipo": "lista", "items": [
+            "Los beneficios son versiones de buffs de clase y **no se acumulan** con ellos: elige lo que no cubran tus amigos.",
+            "Objetos de habilidad 140+: planos que caen en mazmorras/bandas.",
+            "En reglas JcJ el campamento puede ser atacado."
+          ]}
+        ]},
+        {"titulo": "Secundarias", "bloques": [
+          {"tipo": "lista", "items": [
+            "**Primeros auxilios**: vendas para curarte sin maná.",
+            "**Cocina**: comida con buff + necesaria para la fogata.",
+            "**Pesca**: opcional; pecera para el campamento."
+          ]}
+        ]}
+      ]
+    },
+    {
+      "id": "equipo", "titulo": "Equipo",
+      "secciones": [
+        {"titulo": "Prioridad de estadísticas", "bloques": [
+          {"tipo": "tabla", "cabecera": ["Rol", "Prioridad (orientativa)"], "filas": [
+            ["Gato", "**DPS del arma** > poder de ataque > agilidad / fuerza > golpe / crítico > algo de intelecto"],
+            ["Oso", "Aguante > armadura > esquiva / agilidad > **DPS del arma** (amenaza) > resistencias situacionales"]
+          ]},
+          {"tipo": "aviso", "estado": "confirmado", "texto": "En Forever el **DPS del ataque automático en formas = DPS del arma equipada** (velocidad fija de 1,0 s o 2,5 s según forma). Encantamientos de arma y procs (Cruzado, Viento Furioso, piedras de peso) funcionan en forma. El arma SÍ importa."},
+          {"tipo": "texto", "texto": "Lleva **2–3 piezas alternativas de aguante**, no dos equipos enteros mediocres."}
+        ]},
+        {"titulo": "Piezas a vigilar (opcionales)", "bloques": [
+          {"tipo": "tabla", "cabecera": ["Objeto", "Origen", "Nv"], "filas": [
+            ["Serpent's Shoulders", "Cuevas de los Lamentos", "~18–24"],
+            ["Ghostshard Talisman", "Monasterio Escarlata (orientativo)", "~30–38"],
+            ["Scavenged Magram Armament", "Cadena de Desolace (sin confirmar)", "~35+"],
+            ["Grimlok's Charge", "Uldaman (Grimlok)", "~42+"]
+          ]},
+          {"tipo": "aviso", "estado": "orientativo", "texto": "Objetos sin verificar en la base de datos de Forever: comprueba nombre y origen en Wowhead antes de farmearlos."}
+        ]},
+        {"titulo": "Oro y montura", "bloques": [
+          {"tipo": "lista", "numerada": true, "items": [
+            "Formas y facultades esenciales.",
+            "Bolsas / banco.",
+            "Instructores de profesiones.",
+            "Ahorro para **montura al 40**.",
+            "Recetas opcionales."
+          ]},
+          {"tipo": "lista", "items": [
+            "Coste de equitación en Forever: **sin confirmar** (el borrador citaba ~100 de oro y kodo gratuito).",
+            "Ventaja de Legado **Bartering**: precios de vendedor más bajos.",
+            "Oro: misiones, botín sobrante, minerales que no uses. Compara mena vs. barra."
+          ]}
+        ]}
+      ]
+    },
+    {
+      "id": "sistemas", "titulo": "Sistemas",
+      "secciones": [
+        {"titulo": "Legado (Legacy)", "bloques": [
+          {"tipo": "lista", "items": [
+            "Progresión de cuenta: **65 desafíos**, 1 punto cada uno.",
+            "Se abre con el primer punto: normalmente al **nivel 25** con tu primer personaje (o 150 en una profesión no recolectora, o explorando todo el mapa).",
+            "Máximo **16 puntos gastables por personaje** en el lanzamiento (un solo PJ puede ganar hasta 29).",
+            "Tres ramas: Profesiones, Aventura y Recursos."
+          ]},
+          {"tipo": "tabla", "cabecera": ["Ventaja", "Efecto"], "filas": [
+            ["**Working Overtime**", "Más probabilidad de subir habilidad de profesión"],
+            ["**Bountiful Harvest**", "Recursos escasos extra al minar/herborizar/desollar"],
+            ["Performance", "Favor de mercader (ACA / Durotar Supply and Logistics)"],
+            ["Bartering", "Vendedores más baratos"],
+            ["Dedicated Study", "Reutilizaciones diarias / esencias con 300"],
+            ["**Thrill of Adventure**", "Vida y maná tras cada muerte no trivial"],
+            ["**Frequent Flier**", "Vuelos más baratos y rápidos"],
+            ["**Talented**", "Puntos de talento hasta 5 niveles antes"],
+            ["Field Guide", "Reduce la reutilización de 1 h de las acampadas"],
+            ["Well Rested / Field Medicine", "Descanso / curación"]
+          ]},
+          {"tipo": "texto", "texto": "Sugerencia para ti: **Talented, Thrill of Adventure, Working Overtime, Bountiful Harvest, Frequent Flier**."}
+        ]},
+        {"titulo": "Novedades de Forever", "bloques": [
+          {"tipo": "lista", "items": [
+            "**No es Classic Era**: árboles revisados, 1.000+ misiones nuevas, 9 mazmorras nuevas, sin escalado de nivel, **sin monturas voladoras**.",
+            "Zonas nuevas: **Shen'dralas** (entre Mulgore y Desolace), **The Riverglades** (~35–45), **Monte Hyjal**, Zephras Isle (inicio Skyborne).",
+            "**Especialización dual al nivel 40** (coste sin confirmar).",
+            "Ajustes de experiencia: **Clásico** o **Mejorado** (puntos de misión, bolsa única, transfiguración). Se cambia en Opciones.",
+            "Gestor de reutilizaciones y medidor de daño integrados (opciones avanzadas).",
+            "Reglas: Normal, JcJ, Rol, Rol-JcJ; solo agrupas dentro del mismo conjunto de reglas. Hardcore llegará más adelante.",
+            "Campo de batalla nuevo: **Islas Lanza Negra** (15 vs 15)."
+          ]},
+          {"tipo": "aviso", "estado": "orientativo", "texto": "Misiones de forma: Icy Veins bloqueó el acceso automático. Oso al 10 y curar veneno al 14 se mantienen por misión de clase (orientativo); gato, viaje y oso nefasto: instructor (como en Classic) salvo que el juego indique cadena. Teletransporte: Claro de la Luna al 10 (referencia Classic)."}
+        ]},
+        {"titulo": "Misiones de clase (orientativo)", "bloques": [
+          {"tipo": "tabla", "cabecera": ["Nv", "Misión", "Recompensa"], "filas": [
+            ["10", "«Heeding the Call» (Poblado Pezuña de Sangre → Cima del Trueno → Claro de la Luna)", "Forma de oso"],
+            ["14", "«Lessons Anew» (Cima del Trueno)", "Curar veneno"],
+            ["16", "Cadena de forma acuática (Cima del Trueno → Claro de la Luna)", "Forma acuática"],
+            ["20", "Forma felina", "Instructor (o cadena si el juego la ofrece)"],
+            ["30 / 40", "Forma de viaje / Oso nefasto", "Instructor"]
+          ]},
+          {"tipo": "texto", "texto": "Prioridad: al 20 consigue el gato **antes** de seguir subiendo."}
+        ]}
+      ]
+    },
+    {
+      "id": "nivel60", "titulo": "Nivel 60",
+      "secciones": [
+        {"titulo": "Preparación", "bloques": [
+          {"tipo": "lista", "items": [
+            "Arma y equipo feral; 2–3 piezas de aguante para tanquear.",
+            "Misiones y requisitos de entrada de mazmorras finales (Bancal del Modelador: cristales de poder de Un'Goro).",
+            "Practica jefes, posición, amenaza y grupos grandes.",
+            "**Minería 300** (Molten Foundry) · **Ingeniería 300** (Banco anarquista).",
+            "Consumibles, comida, vendas, reparaciones y oro de reserva.",
+            "Acampadas y ventajas de Legado desbloqueadas.",
+            "Sin prisa: el equipo de banda no es requisito del día 1."
+          ]}
+        ]},
+        {"titulo": "Bandas", "bloques": [
+          {"tipo": "tabla", "cabecera": ["Fecha", "Banda"], "filas": [
+            ["9/12/2026", "**Barrow Deeps** (10 jugadores, nueva)"],
+            ["9/12/2026", "**Cumbre Hyjal** (20 jugadores)"],
+            ["9/12/2026", "**Guarida de Onyxia** (requisito de entrada propio)"],
+            ["Más tarde", "Más bandas, Hardcore, una banda icónica renovada (sin fecha)"]
+          ]},
+          {"tipo": "aviso", "estado": "orientativo", "texto": "Calendario a fecha 15/11/2026 (fuente Blizzard). Actualízalo si cambia."}
+        ]}
+      ]
+    },
+    {
+      "id": "fuentes", "titulo": "Fuentes",
+      "secciones": [
+        {"titulo": "Versión del contenido", "bloques": [{"tipo": "fuentes"}]}
+      ]
+    }
+  ]
+}
