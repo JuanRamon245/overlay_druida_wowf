@@ -7,7 +7,7 @@ from pathlib import Path
 
 BLOCK_TYPES = {"texto", "lista", "tabla", "aviso", "tarjeta", "talentos", "indice", "fuentes",
                "checklist", "imagen", "progreso", "controles",
-               "entrenamiento", "presets", "hechizos_todos", "leyenda_hechizos", "misiones"}
+               "entrenamiento", "presets", "hechizos_todos", "leyenda_hechizos", "misiones", "leyenda_misiones"}
 
 
 def base_dir() -> Path:

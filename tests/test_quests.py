@@ -52,6 +52,36 @@ def test_quest_data_tauren_druid():
     assert any(q["zona"] == 16591 for q in data["misiones"])          # Riverglades (zona nueva)
 
 
+def test_difficulty_colors_like_game():
+    d = quests.difficulty
+    assert d(14, 2) == "rojo" and d(7, 4) == "naranja" and d(5, 4) == "amarillo"
+    assert d(2, 4) == "amarillo" and d(10, 15) == "verde" and d(5, 20) == "gris"
+    assert d(-1, 30) == "amarillo"          # escala con tu nivel
+
+
+@need_data
+def test_legend_and_level_labels():
+    guide = load_guide()
+    tab = next(t for t in guide["tabs"] if t["id"] == "misiones")
+    html = render_tab(guide, tab, Progress(set(), {"m1"}))
+    assert "nivel mínimo para aceptar" in html and "Nivel de la misión" in html
+    assert ">nv 2<" in html                                  # etiqueta nueva en lugar de [2]
+    assert "[2]" not in html
+
+
+@need_data
+def test_only_horde_tauren_reachable_zones():
+    data = quests.load_quests()
+    zone_names = {quests.zone_en(data, q["zona"]) for q in data["misiones"]}
+    zone_names |= {quests.zone_en(data, q["ini"].get("a")) for q in data["misiones"] if q["ini"].get("a")}
+    assert not zone_names & {"Zephras Isle", "Valley of Trials", "Deathknell"}
+    guide = load_guide()
+    tab = next(t for t in guide["tabs"] if t["id"] == "misiones")
+    html = render_tab(guide, tab, Progress(set(), {"m1"}))
+    assert html.index("Mesa de la Nube Roja") < html.index("Durotar")   # tu ruta primero
+    assert "fuera de tu ruta" in html
+
+
 @need_data
 def test_tab_has_level_sections_folded():
     guide = load_guide()

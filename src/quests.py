@@ -30,6 +30,69 @@ ZONAS_ES = {
 }
 
 
+# Orden de zonas de la ruta tauren (pestaña Ruta). Las que no están aquí se muestran al final.
+RUTA_TAUREN = [
+    "Red Cloud Mesa", "Mulgore", "Thunder Bluff", "The Barrens", "Orgrimmar", "Stonetalon Mountains", "Ashenvale",
+    "Thousand Needles", "Hillsbrad Foothills", "Alterac Mountains", "Desolace", "Shen'dralas", "Stranglethorn Vale",
+    "Riverglades", "Dustwallow Marsh", "Tanaris", "Feralas", "The Hinterlands", "Searing Gorge", "Badlands",
+    "Un'Goro Crater", "Felwood", "Western Plaguelands", "Azshara", "Winterspring", "Eastern Plaguelands",
+    "Silithus", "Burning Steppes", "Mount Hyjal", "Moonglade",
+]
+
+
+DIFICULTAD = [  # (clave, color, texto) en el orden en que se muestran en la leyenda
+    ("gris", "#8a8a8a", "trivial, apenas da experiencia"),
+    ("verde", "#4cc24c", "fácil"),
+    ("amarillo", "#ffd200", "de tu nivel"),
+    ("naranja", "#ff8a3d", "difícil"),
+    ("rojo", "#ff4a4a", "muy difícil: déjala para más adelante"),
+]
+_COLOR = {k: c for k, c, _ in DIFICULTAD}
+
+
+def _green_range(player_level: int) -> int:
+    """Diferencia máxima por debajo de tu nivel para que una misión siga siendo verde (como en Classic)."""
+    if player_level <= 9:
+        return 4
+    if player_level <= 19:
+        return 5
+    if player_level <= 29:
+        return 6
+    if player_level <= 39:
+        return 7
+    return 8
+
+
+def difficulty(quest_level: int, player_level: int) -> str:
+    """Color de dificultad del juego para una misión, según tu nivel."""
+    if quest_level <= 0:                      # misiones que escalan con tu nivel
+        return "amarillo"
+    diff = quest_level - player_level
+    if diff >= 5:
+        return "rojo"
+    if diff >= 3:
+        return "naranja"
+    if diff >= -2:
+        return "amarillo"
+    if -diff <= _green_range(player_level):
+        return "verde"
+    return "gris"
+
+
+def difficulty_color(quest_level: int, player_level: int) -> str:
+    return _COLOR[difficulty(quest_level, player_level)]
+
+
+def zone_en(data: dict, area) -> str:
+    return (data.get("zonas", {}).get(str(area)) or {}).get("n", f"Zona {area}")
+
+
+def route_rank(data: dict, area) -> int:
+    """Posición de la zona en la ruta tauren (fuera de la ruta → al final)."""
+    en = zone_en(data, area)
+    return RUTA_TAUREN.index(en) if en in RUTA_TAUREN else len(RUTA_TAUREN)
+
+
 def data_path() -> Path:
     for folder in (content_dir().parent / "data", base_dir() / "data"):
         if (folder / "misiones_horda.json").is_file():
@@ -76,10 +139,16 @@ def build_tab(data: dict | None) -> dict:
                                    "**nivel mínimo para aceptarlas**. Haz clic en una misión para ver en el mapa "
                                    "dónde se coge (**!** amarillo) y dónde se entrega (**?** azul). "
                                    "Marca ☐ las que completes."},
+        {"tipo": "leyenda_misiones"},
         {"tipo": "indice"},
-        {"tipo": "aviso", "estado": "confirmado", "texto": f"Datos: {data.get('fuente', 'NorgannonDB')}. "
-                                                          "Mapas reales de Forever (Wowhead). Nombres de misión "
-                                                          "en inglés, como en la base de datos."},
+        {"tipo": "aviso", "estado": "confirmado", "texto": f"Datos: {data.get('fuente', 'NorgannonDB')}. Solo "
+                                                          "misiones de la **Horda** que puede coger un tauren druida "
+                                                          "(sin las zonas de inicio de orcos, no-muertos ni Skyborne). "
+                                                          "Cada nivel empieza por las zonas de tu ruta tauren."},
+        {"tipo": "aviso", "estado": "orientativo", "texto": "Los mapas son los de **Forever** (Wowhead) y están en "
+                                                            "**inglés**: el mapa en español de Wowhead es el antiguo de "
+                                                            "Classic (sin la meseta de Skywatcher) y las coordenadas "
+                                                            "de Forever no coincidirían. Nombres de misión en inglés."},
     ]
     for lv in range(1, 61):
         ids = quest_ids_at(data, lv)

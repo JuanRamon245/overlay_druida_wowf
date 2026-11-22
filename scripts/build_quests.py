@@ -27,6 +27,9 @@ MAX_LEVEL = 60
 EXCLUDE_SORTS = {-364, -365, -367, -368}
 EXCLUDE_PREFIXES = ("Craftsman's Writ", "Investigate the Scourge")
 EXCLUDE_CONTAINS = ("Commendation Signet",)
+# Zonas de inicio de OTRAS razas de la Horda: un tauren empieza en la Mesa de la Nube Roja (Mulgore)
+# y nunca pasa por ellas. La isla Zephras es exclusiva de los Skyborne.
+EXCLUDE_ZONES = {"Zephras Isle", "Valley of Trials", "Deathknell"}
 
 
 def _read(name: str) -> str:
@@ -164,6 +167,11 @@ def build() -> dict:
         if pre_ids:
             entry["pre"] = pre_ids[:3]
         quests.append(entry)
+
+    def zname(a):
+        return (zones_raw.get(a) or {}).get("name")
+    quests = [e for e in quests
+              if zname(e.get("zona")) not in EXCLUDE_ZONES and zname(e["ini"].get("a")) not in EXCLUDE_ZONES]
 
     for e in quests:              # nombres de las previas, para mostrarlas
         if "pre" in e:

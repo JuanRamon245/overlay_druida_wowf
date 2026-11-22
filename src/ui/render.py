@@ -245,6 +245,8 @@ def render_block(guide, tab, blk, checks=frozenset(), view=None):
     t = blk["tipo"]
     if t == "misiones":
         return _quest_list(guide, blk, checks, (view or {}).get("quest"))
+    if t == "leyenda_misiones":
+        return _quest_legend()
     if t == "texto":
         return f'<p style="margin-top:0px; margin-bottom:6px;">{inline(blk["texto"])}</p>'
     if t == "lista":
@@ -490,19 +492,44 @@ def _quest_detail(data, q):
     return "".join(out)
 
 
+def _quest_legend():
+    rows = [f'<tr><td style="color:{GOLD}; white-space:nowrap;" valign="top"><b>Nivel 2</b></td>'
+            f'<td>Título de la sección: <b>nivel mínimo para aceptar</b> la misión.</td></tr>',
+            f'<tr><td style="color:{GOLD}; white-space:nowrap;" valign="top"><b>nv 14</b></td>'
+            f'<td><b>Nivel de la misión</b> (dificultad y experiencia). Su color es el del juego si la '
+            f'coges con el nivel de la sección:</td></tr>']
+    colors = " &nbsp;".join(f'<span style="color:{c}; font-weight:600;">■ {html.escape(k)}</span>'
+                            f' <span style="color:{MUTED};">{html.escape(t)}</span>'
+                            for k, c, t in quests.DIFICULTAD)
+    rows.append(f'<tr><td></td><td>{colors}</td></tr>')
+    rows.append(f'<tr><td style="color:{GOLD};" valign="top"><b>nv =</b></td>'
+                f'<td>La misión se adapta a tu nivel.</td></tr>')
+    return ('<table width="100%" cellspacing="0" cellpadding="2" style="margin-bottom:6px;">'
+            + "".join(rows) + "</table>"
+            f'<p style="margin-top:0px; margin-bottom:6px; color:{MUTED};">Una misión en «Nivel 2» con '
+            f'<span style="color:#ff4a4a; font-weight:600;">nv 14</span> se puede coger ya, pero conviene hacerla '
+            f'cerca del 14.</p>')
+
+
 def _quest_list(guide, blk, checks, selected):
     data = guide.get("_misiones")
     if not data:
         return ""
     idx = data["index"]
     by_zone: dict[str, list] = {}
+    rank: dict[str, int] = {}
     for qid in blk["ids"]:
         q = idx[qid]
-        by_zone.setdefault(quests.zone_name(data, q.get("zona")), []).append(q)
+        zone = quests.zone_name(data, q.get("zona"))
+        by_zone.setdefault(zone, []).append(q)
+        rank[zone] = quests.route_rank(data, q.get("zona"))
     out = []
-    for zone in sorted(by_zone):
-        out.append(f'<p style="margin-top:4px; margin-bottom:1px; color:{GOLD};">'
-                   f'{icon("ruta", 12)} {html.escape(zone)}</p>')
+    off_route = len(quests.RUTA_TAUREN)
+    for zone in sorted(by_zone, key=lambda z: (rank[z], z)):
+        far = rank[zone] >= off_route
+        note = f' <span style="color:{MUTED}; font-size:small;">(fuera de tu ruta)</span>' if far else ""
+        out.append(f'<p style="margin-top:4px; margin-bottom:1px; color:{MUTED if far else GOLD};">'
+                   f'{icon("ruta", 12)} {html.escape(zone)}{note}</p>')
         rows: list[str] = []
         table_open = ('<table width="100%" cellspacing="0" cellpadding="1" style="margin-bottom:4px;">')
         for q in by_zone[zone]:
@@ -514,8 +541,11 @@ def _quest_list(guide, blk, checks, selected):
             arrow = "▾" if sel else "▸"
             giver = q.get("ini", {}).get("n")
             sub = f'<br><span style="color:{MUTED}; font-size:small;">de {html.escape(giver)}</span>' if giver else ""
+            lv_color = DONE if done else quests.difficulty_color(q["lv"], blk["nivel"])
+            lv_text = f"nv {q['lv']}" if q["lv"] > 0 else "nv ="
             rows.append(f'<tr><td width="20" valign="top">{checkbox(cid, done)}</td>'
-                        f'<td width="24" valign="top" style="color:{MUTED}; font-size:small;">[{q["lv"]}]</td>'
+                        f'<td width="34" valign="top" style="color:{lv_color}; font-size:small; font-weight:600;'
+                        f' white-space:nowrap;">{lv_text}</td>'
                         f'<td valign="top"><a href="quest:{q["id"]}" style="color:{color}; text-decoration:none;">'
                         f'<span style="color:{MUTED};">{arrow}</span> {html.escape(q["n"])}</a>{tags}{sub}</td></tr>')
             if sel:   # el detalle va fuera de la tabla para no descuadrar las columnas
