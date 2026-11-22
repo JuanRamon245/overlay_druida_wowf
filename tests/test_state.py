@@ -52,3 +52,10 @@ def test_window_on_existing_second_monitor_kept():
 def test_header_above_screen_relocated():
     x, y, w, h = ensure_on_screen((300, -400, 380, 500), [PRIMARY], PRIMARY)
     assert y >= 0
+
+
+def test_bom_file_accepted(tmp_path):
+    p = tmp_path / "bom.json"
+    p.write_text('{"tab": "ruta", "pinned": false}', encoding="utf-8-sig")
+    st = load_state(p)
+    assert st.tab == "ruta" and st.pinned is False

@@ -92,7 +92,7 @@ def test_route_index_anchors_exist(guide):
 
 def test_unknown_block_rejected(guide):
     bad = copy.deepcopy({k: v for k, v in guide.items() if not k.startswith("_")})
-    bad["tabs"][0]["secciones"][0]["bloques"].append({"tipo": "checklist"})
+    bad["tabs"][0]["secciones"][0]["bloques"].append({"tipo": "bloque_inventado"})
     with pytest.raises(ContentError):
         validate_guide(bad)
 

@@ -36,6 +36,9 @@ Fuentes completas con fechas en `content/fuentes.json` (también en la pestaña 
 
 ## Sigue siendo orientativo (marcado en la app con ≈ o en ámbar)
 
+- **Pestaña Hechizos** (v1.2): los niveles de cada rango son los del instructor de Classic, con los cambios confirmados de Forever (Revivir al 12, Garras de la naturaleza base al 10, Presagio de claridad base al 20, Lacerar como talento con rangos 34/42/50/58, Mordisco primigenio con rangos 50/60, sin Furia del tigre ni Fuego feérico feral). No se ha podido contrastar con una lista de instructor de Forever. Qué entrenar y qué ignorar es una recomendación de juego feral, no un dato.
+- **Pestaña Barras**: disposición habitual de la comunidad feral, redactada como propuesta propia, no copiada de una fuente concreta.
+
 - **Filas exactas del árbol**: Blizzard no publica una tabla en texto y el calculador de Wowhead no se pudo leer (contenido dinámico). Están confirmados los umbrales de 11, 16, 21 y 31 puntos (Carga feral, Lacerar/Disciplina, Líder de la manada, Mordisco primigenio/Poder cambiante); el resto de requisitos se deducen del orden de leveo publicado.
 - **Misiones de clase** (oso 10, curar veneno 14, acuática 16, gato 20): Icy Veins devolvió 403. Se usan los nombres de Classic y se marcan como orientativos.
 - **Pasiva «Poised» (nv 32)**: no aparece en ninguna fuente, así que no se muestra como hecho.
@@ -48,7 +51,7 @@ Fuentes completas con fechas en `content/fuentes.json` (también en la pestaña 
 
 ## Pruebas ejecutadas (Windows 11, monitor real al 125 %)
 
-- `pytest`: 24 tests correctos. Cubren: contenido, ruta de talentos legal nivel a nivel (51 puntos, 41/10), detección de rutas ilegales, persistencia, recolocación entre monitores y ventana real (pestañas, chincheta, contraer, tamaño mínimo, restauración del estado).
+- `pytest`: 51 tests correctos (v1.2 añade los de hechizos y barras) (v1.1 añade los de progreso: guardado, ids únicos, capítulo actual, plegado automático, «Solo el actual», refresco del resumen e iconos). Cubren: contenido, ruta de talentos legal nivel a nivel (51 puntos, 41/10), detección de rutas ilegales, persistencia, recolocación entre monitores y ventana real (pestañas, chincheta, contraer, tamaño mínimo, restauración del estado).
 - **Chincheta**: verificada con `GetWindowLongPtr` (WS_EX_TOPMOST se activa y desactiva) en Python y en el `.exe`.
 - **Escalado**: 125 % real y 150 % / 200 % simulados con `QT_SCALE_FACTOR` al tamaño mínimo de 320×280. La chincheta y la cabecera se ven bien.
 - **`.exe`**: abre la ventana, 0 ms de CPU en 5 s de reposo, ~33 MB de memoria privada, guarda el estado y al cerrar no deja procesos.

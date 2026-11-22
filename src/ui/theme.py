@@ -14,6 +14,7 @@ QSS = f"""
 #root {{ background: {BG}; border: 1px solid {BORDER}; }}
 #header {{ background: {HEADER}; border-bottom: 1px solid {BORDER}; }}
 #title {{ color: {GOLD}; font-weight: 700; letter-spacing: 0.5px; }}
+#chapter {{ color: {TEXT}; background: #2a2e35; border-radius: 3px; padding: 0px 5px; font-size: 8pt; }}
 #badge {{ color: {TEXT}; background: {HORDE}; border-radius: 3px; padding: 0px 5px; font-size: 8pt; font-weight: 600; }}
 QToolButton {{ color: {MUTED}; background: transparent; border: 1px solid transparent; border-radius: 3px;
               padding: 0px; min-width: 22px; min-height: 20px; }}

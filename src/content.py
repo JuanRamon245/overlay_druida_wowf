@@ -5,7 +5,9 @@ import json
 import sys
 from pathlib import Path
 
-BLOCK_TYPES = {"texto", "lista", "tabla", "aviso", "tarjeta", "talentos", "indice", "fuentes"}
+BLOCK_TYPES = {"texto", "lista", "tabla", "aviso", "tarjeta", "talentos", "indice", "fuentes",
+               "checklist", "imagen", "progreso", "controles",
+               "entrenamiento", "presets", "hechizos_todos", "leyenda_hechizos"}
 
 
 def base_dir() -> Path:
@@ -30,12 +32,25 @@ class ContentError(ValueError):
 
 def load_json(name: str, folder: Path | None = None) -> dict:
     path = (folder or content_dir()) / name
-    with open(path, encoding="utf-8") as fh:
+    with open(path, encoding="utf-8-sig") as fh:  # admite JSON guardado con BOM (Bloc de notas)
         return json.load(fh)
 
 
 def load_guide(folder: Path | None = None) -> dict:
+    import spells  # import local: spells no depende de este módulo
     guide = load_json("guia_es.json", folder)
+    try:
+        data = load_json("hechizos.json", folder)
+    except FileNotFoundError:
+        data = None
+    if data is not None:
+        errors = spells.validate(data)
+        if errors:
+            raise ContentError("hechizos.json inválido:\n" + "\n".join(errors))
+        guide["_hechizos"] = data
+        ids = [t["id"] for t in guide["tabs"]]
+        pos = ids.index("talentos") + 1 if "talentos" in ids else len(ids)
+        guide["tabs"][pos:pos] = spells.build_tabs(data)
     validate_guide(guide)
     try:
         guide["_fuentes"] = load_json("fuentes.json", folder)
@@ -49,6 +64,7 @@ def validate_guide(guide: dict) -> None:
         if key not in guide:
             raise ContentError(f"Falta la clave '{key}' en guia_es.json")
     ids = set()
+    check_ids: list[str] = []
     for tab in guide["tabs"]:
         if not tab.get("id") or not tab.get("titulo"):
             raise ContentError("Cada pestaña necesita 'id' y 'titulo'")
@@ -59,6 +75,18 @@ def validate_guide(guide: dict) -> None:
             for blk in sec.get("bloques", []):
                 if blk.get("tipo") not in BLOCK_TYPES:
                     raise ContentError(f"Bloque desconocido '{blk.get('tipo')}' en {tab['id']}")
+                if blk["tipo"] == "checklist":
+                    for item in blk.get("items", []):
+                        if not item.get("id") or not item.get("texto"):
+                            raise ContentError(f"Objetivo sin 'id' o 'texto' en {tab['id']}")
+                        check_ids.append(item["id"])
+                if blk["tipo"] == "tabla" and "ids" in blk:
+                    if len(blk["ids"]) != len(blk["filas"]):
+                        raise ContentError(f"La tabla de {tab['id']} tiene distinto número de 'ids' y filas")
+                    check_ids.extend(blk["ids"])
+    dup = {i for i in check_ids if check_ids.count(i) > 1}
+    if dup:
+        raise ContentError(f"Ids de objetivos repetidos: {', '.join(sorted(dup))}")
     errors = check_talent_route(guide["talentos"])
     if errors:
         raise ContentError("Ruta de talentos inválida:\n" + "\n".join(errors))

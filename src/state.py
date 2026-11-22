@@ -36,7 +36,7 @@ def state_path() -> Path:
 def load_state(path: Path | str | None = None) -> WindowState:
     path = Path(path) if path else state_path()
     try:
-        raw = json.loads(path.read_text(encoding="utf-8"))
+        raw = json.loads(path.read_text(encoding="utf-8-sig"))
     except (OSError, ValueError):
         return WindowState()
     if not isinstance(raw, dict):

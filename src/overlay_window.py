@@ -1,13 +1,20 @@
 """Ventana flotante del overlay: cabecera arrastrable, chincheta, pestañas de lectura."""
 from __future__ import annotations
 
-from PySide6.QtCore import QEvent, QPoint, QRect, QSize, Qt, QTimer
-from PySide6.QtGui import QAction, QActionGroup, QCursor, QFont, QGuiApplication, QIcon, QKeySequence, QShortcut
-from PySide6.QtWidgets import (QFrame, QHBoxLayout, QLabel, QMenu, QStackedWidget, QTabBar, QTextBrowser,
-                               QToolButton, QVBoxLayout, QWidget)
+from pathlib import Path
+
+from PySide6.QtCore import QEvent, QPoint, QRect, QSize, Qt, QTimer, QUrl
+from PySide6.QtCore import QRectF
+from PySide6.QtGui import (QAction, QActionGroup, QColor, QCursor, QDesktopServices, QFont, QGuiApplication, QIcon,
+                           QImage, QKeySequence, QPainter, QPainterPath, QPen, QShortcut, QTextDocument)
+from PySide6.QtSvg import QSvgRenderer
+from PySide6.QtWidgets import (QFrame, QHBoxLayout, QLabel, QMenu, QMessageBox, QStackedWidget, QTabBar,
+                               QTextBrowser, QToolButton, QVBoxLayout, QWidget)
 
 import winapi
-from content import base_dir
+from content import base_dir, content_dir
+from progress import (Progress, all_chapters, chapter_label, chapters, current_chapter, load_progress, save_progress,
+                      section_status)
 from state import MIN_H, MIN_W, DEFAULT_H, DEFAULT_W, WindowState, ensure_on_screen, save_state
 from ui.render import render_tab
 from ui.theme import QSS
@@ -20,12 +27,105 @@ def asset(name: str) -> str:
     return str(base_dir() / "assets" / name)
 
 
+_IMG_CACHE: dict[str, QImage] = {}
+
+
+def _render_svg(path: Path, scale: int) -> QImage:
+    r = QSvgRenderer(str(path))
+    size = r.defaultSize()
+    img = QImage(size.width() * scale, size.height() * scale, QImage.Format_ARGB32_Premultiplied)
+    img.fill(Qt.transparent)
+    p = QPainter(img)
+    r.render(p)
+    p.end()
+    img.setDevicePixelRatio(scale)   # nítido en pantallas con escalado alto
+    return img
+
+
+def resolve_image(url: QUrl) -> QImage | None:
+    """icon:<nombre> → assets/icons/<nombre>.svg · res:<ruta> → assets/… o content/…"""
+    key = url.toString()
+    if key in _IMG_CACHE:
+        return _IMG_CACHE[key]
+    scheme, path = url.scheme(), url.path()
+    if scheme == "icon":
+        file = base_dir() / "assets" / "icons" / f"{path}.svg"
+        scale = 4
+    elif scheme == "res":
+        file = base_dir() / path if path.startswith("assets/") else content_dir() / path
+        scale = 3
+    elif scheme in ("spell", "spellg", "spellup"):
+        file = base_dir() / "assets" / "spells" / f"{path}.svg"
+        if not file.is_file():
+            return None
+        img = _spell_variant(_render_svg(file, 3), scheme)
+        _IMG_CACHE[key] = img
+        return img
+    else:
+        return None
+    if not file.is_file():
+        return None
+    img = _render_svg(file, scale) if file.suffix.lower() == ".svg" else QImage(str(file))
+    _IMG_CACHE[key] = img
+    return img
+
+
+def _spell_variant(base: QImage, scheme: str) -> QImage:
+    """spell: normal · spellg: gris apagado (ignorado) · spellup: con insignia «+1» (entrenar)."""
+    if scheme == "spell":
+        return base
+    dpr = base.devicePixelRatio()
+    w, h = base.width(), base.height()
+    out = QImage(w, h, QImage.Format_ARGB32_Premultiplied)
+    out.fill(Qt.transparent)
+    p = QPainter(out)
+    p.setRenderHint(QPainter.Antialiasing)
+    raw = QImage(base)
+    raw.setDevicePixelRatio(1.0)
+    if scheme == "spellg":
+        clip = QPainterPath()
+        clip.addRoundedRect(QRectF(0, 0, w, h), w * 0.17, h * 0.17)
+        p.setClipPath(clip)
+        p.setOpacity(0.42)
+        p.drawImage(0, 0, raw.convertToFormat(QImage.Format_Grayscale8))
+    else:
+        p.drawImage(0, 0, raw)
+        bw, bh = w * 0.62, h * 0.44
+        badge = QRectF(w - bw, 0, bw, bh)
+        p.setPen(QPen(QColor("#ffffff"), max(1.0, w / 32)))
+        p.setBrush(QColor("#2f8a33"))
+        p.drawRoundedRect(badge, bh * 0.45, bh * 0.45)
+        f = QFont("Segoe UI")
+        f.setPixelSize(int(bh * 0.9))
+        f.setBold(True)
+        p.setFont(f)
+        p.drawText(badge, Qt.AlignCenter, "+1")
+    p.end()
+    out.setDevicePixelRatio(dpr)
+    return out
+
+
+class GuideBrowser(QTextBrowser):
+    """Visor de una pestaña: resuelve iconos/imágenes locales y no navega solo."""
+
+    def loadResource(self, rtype, url):
+        if rtype == QTextDocument.ImageResource:
+            img = resolve_image(url)
+            if img is not None:
+                return img
+        return super().loadResource(rtype, url)
+
+
 class OverlayWindow(QWidget):
-    def __init__(self, guide: dict, state: WindowState, state_file=None):
+    def __init__(self, guide: dict, state: WindowState, state_file=None,
+                 progress: Progress | None = None, progress_file=None):
         super().__init__(None, Qt.Window | Qt.FramelessWindowHint | Qt.WindowMinimizeButtonHint)
         self.guide = guide
         self.state = state
         self.state_file = state_file
+        self.progress_file = progress_file
+        self.progress = progress if progress is not None else load_progress(progress_file)
+        self._dirty: set[str] = set()
         self.setObjectName("root")
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setWindowTitle("Feral Companion — Forever Overlay")
@@ -55,17 +155,24 @@ class OverlayWindow(QWidget):
         root.addWidget(self.body, 1)
 
         self.browsers: dict[str, QTextBrowser] = {}
+        self.tabs_by_id: dict[str, dict] = {}
         self.tab_ids: list[str] = []
         for tab in guide["tabs"]:
-            br = QTextBrowser(self.stack)
-            br.setOpenExternalLinks(True)
+            br = GuideBrowser(self.stack)
+            br.setOpenLinks(False)
             br.setFrameShape(QFrame.NoFrame)
-            br.setHtml(render_tab(guide, tab))
+            br.anchorClicked.connect(lambda url, tid=tab["id"]: self._on_link(tid, url))
             br.verticalScrollBar().valueChanged.connect(self._update_totop)
             self.stack.addWidget(br)
-            self.tabbar.addTab(tab["titulo"])
+            idx = self.tabbar.addTab(tab["titulo"])
+            icon_file = base_dir() / "assets" / "icons" / f"{tab['id']}.svg"
+            if icon_file.is_file():
+                self.tabbar.setTabIcon(idx, QIcon(str(icon_file)))
             self.browsers[tab["id"]] = br
+            self.tabs_by_id[tab["id"]] = tab
             self.tab_ids.append(tab["id"])
+            br.setHtml(render_tab(guide, tab, self.progress))
+        self.tabbar.setIconSize(QSize(14, 14))
         self.tabbar.currentChanged.connect(self._on_tab)
 
         self.totop = QToolButton(self.stack)
@@ -111,9 +218,12 @@ class OverlayWindow(QWidget):
         badge.setObjectName("badge")
         badge.setFixedHeight(16)
         badge.setToolTip("Feral híbrido: oso (tanque) + gato (DPS)")
+        self.chapter_lbl = QLabel(hdr)
+        self.chapter_lbl.setObjectName("chapter")
         lay.addWidget(icon)
         lay.addWidget(title)
         lay.addWidget(badge)
+        lay.addWidget(self.chapter_lbl)
         lay.addStretch(1)
 
         self.pin_btn = QToolButton(hdr)
@@ -145,7 +255,95 @@ class OverlayWindow(QWidget):
             w.installEventFilter(self)
         hdr.setToolTip("Arrastra para mover · doble clic: contraer · clic derecho: opciones")
         self._update_collapse_button()
+        self._update_chapter_label()
         return hdr
+
+    # ------------------------------------------------------------------ progreso
+    def _update_chapter_label(self) -> None:
+        cur = current_chapter(self.guide, self.progress.checks)
+        self.chapter_lbl.setText(chapter_label(cur))
+        self.chapter_lbl.setToolTip("Capítulo actual de la ruta" if cur else "Ruta completada")
+
+    def rerender(self, tid: str) -> None:
+        br = self.browsers[tid]
+        sb = br.verticalScrollBar()
+        pos = sb.value()
+        br.setHtml(render_tab(self.guide, self.tabs_by_id[tid], self.progress))
+        sb.setValue(pos)
+        QTimer.singleShot(0, lambda: sb.setValue(pos))
+        self._dirty.discard(tid)
+
+    def _progress_changed(self, tid: str) -> None:
+        """Re-pinta la pestaña visible y marca las demás para re-pintarlas al abrirlas."""
+        save_progress(self.progress, self.progress_file)
+        self._dirty.update(self.tab_ids)
+        self.rerender(tid)
+        self._update_chapter_label()
+
+    def toggle_check(self, cid: str, tid: str | None = None) -> None:
+        chs = all_chapters(self.guide)
+        before = {c["ancla"] for c in chs if section_status(c, self.progress.checks)["complete"]}
+        self.progress.toggle_check(cid)
+        for ch in chs:   # al completar un capítulo (o un nivel de instructor) se pliega solo
+            if ch["ancla"] not in before and section_status(ch, self.progress.checks)["complete"]:
+                self.progress.folded.add(ch["ancla"])
+        self._progress_changed(tid or self.current_tab_id())
+
+    def toggle_fold(self, sid: str, tid: str | None = None) -> None:
+        self.progress.toggle_fold(sid)
+        self._progress_changed(tid or self.current_tab_id())
+
+    def run_command(self, cmd: str, tid: str = "ruta") -> None:
+        chs = chapters(self.guide, tid)
+        ids = [c["ancla"] for c in chs]
+        cur = current_chapter(self.guide, self.progress.checks, tid)
+        if cmd == "solo-actual":
+            self.progress.folded.update(ids)
+            if cur:
+                self.progress.folded.discard(cur["ancla"])
+        elif cmd == "plegar-completados":
+            self.progress.folded.update(c["ancla"] for c in chs
+                                        if section_status(c, self.progress.checks)["complete"])
+        elif cmd == "desplegar":
+            self.progress.folded.difference_update(ids)
+        self._progress_changed(tid)
+        if cmd == "solo-actual" and cur:
+            QTimer.singleShot(0, lambda: self.browsers[tid].scrollToAnchor(cur["ancla"]))
+
+    def go_to(self, tid: str, anchor: str = "") -> None:
+        if tid in self.tab_ids:
+            self.tabbar.setCurrentIndex(self.tab_ids.index(tid))
+            if tid in self._dirty:
+                self.rerender(tid)
+            if anchor:
+                self.progress.folded.discard(anchor)
+                self.rerender(tid)
+                QTimer.singleShot(0, lambda: self.browsers[tid].scrollToAnchor(anchor))
+
+    def _on_link(self, tid: str, url: QUrl) -> None:
+        scheme = url.scheme()
+        if scheme == "check":
+            self.toggle_check(url.path(), tid)
+        elif scheme == "fold":
+            self.toggle_fold(url.path(), tid)
+        elif scheme == "cmd":
+            self.run_command(url.path(), tid)
+        elif scheme == "goto":
+            self.go_to(url.path(), url.fragment())
+        elif scheme in ("http", "https"):
+            QDesktopServices.openUrl(url)   # solo si el usuario hace clic en una fuente
+        elif url.hasFragment():
+            self.browsers[tid].scrollToAnchor(url.fragment())
+
+    def reset_progress(self) -> None:
+        ans = QMessageBox.question(self, "Reiniciar progreso",
+                                   "¿Borrar todos los objetivos marcados y las secciones plegadas?\n"
+                                   "No se puede deshacer.",
+                                   QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        if ans == QMessageBox.Yes:
+            self.progress.checks.clear()
+            self.progress.folded.clear()
+            self._progress_changed(self.current_tab_id())
 
     # ------------------------------------------------------------------ chincheta
     def hwnd(self) -> int:
@@ -212,6 +410,8 @@ class OverlayWindow(QWidget):
     def _on_tab(self, idx: int) -> None:
         self.stack.setCurrentIndex(idx)
         self.state.tab = self.tab_ids[idx]
+        if self.state.tab in self._dirty:
+            self.rerender(self.state.tab)
         self._update_totop()
         self._schedule_save()
 
@@ -351,6 +551,7 @@ class OverlayWindow(QWidget):
 
     def closeEvent(self, e):
         self.persist()
+        save_progress(self.progress, self.progress_file)
         super().closeEvent(e)
 
     # ------------------------------------------------------------------ menú contextual
@@ -381,6 +582,8 @@ class OverlayWindow(QWidget):
         m.addAction("Fijar / soltar (Ctrl+P)", self.toggle_pin)
         m.addAction("Recolocar en el monitor principal", self.recenter)
         m.addAction("Restablecer tamaño y posición", self.reset_geometry)
+        m.addSeparator()
+        m.addAction("Reiniciar progreso…", self.reset_progress)
         m.addSeparator()
         m.addAction("Cerrar", self.close)
         m.exec(pos if pos is not None else QCursor.pos())
