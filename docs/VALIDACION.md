@@ -1,7 +1,26 @@
-# Validación del contenido (15/11/2026)
+# Validación del contenido (revisado el 22/11/2026)
 
-Juego: World of Warcraft: Forever, lanzamiento el 4/11/2026, cliente 1.60.1, hotfixes revisados hasta el 13/11/2026.
+Juego: World of Warcraft: Forever, lanzamiento el 4/11/2026, cliente 1.60.1 (build 71037), hotfixes revisados hasta el 19/11/2026.
 Fuentes completas con fechas en `content/fuentes.json` (también en la pestaña **Fuentes** del overlay).
+
+## Revisión del 22/11/2026 con guías publicadas tras el lanzamiento
+
+Guías leídas completas: wowforeverprogress (15/11), Method (4/11), leprestore (6/11), Muchamiel (14/11) y el árbol de wowclassicforever.info (build 71037). Wowhead, Mobalytics, wowfdb, foreverspec y wow4ever no se pudieron leer (contenido por JavaScript, 403 o certificado inválido). No se encontraron guías en ruso; las de alemán y francés no tenían contenido de druida.
+
+| Tema | Antes | Ahora | Fuente |
+|---|---|---|---|
+| **Ruta de talentos** | Poder cambiante al 41 sin Disciplina depredadora | **Era ilegal.** Poder cambiante exige Disciplina depredadora (cogida al 26); Mordisco primigenio exige Líder de la manada | wowclassicforever + wowforeverprogress + leprestore |
+| Árbol Feral | Filas deducidas | **7 filas confirmadas** (0/5/10/15/20/25/30) con rangos máximos y prerrequisitos | wowclassicforever + wowforeverprogress |
+| Poder cambiante mejorado | En el árbol | **No existe** en el árbol final | wowclassicforever |
+| Impacto brutal | Ausente | Añadido (fila 2) | wowclassicforever |
+| Amenaza en oso | — | **115 %** | todas |
+| Prioridad de oso | Genérica | Lacerar ×5 (renovar ≤ 3 s) → Fuego feérico → Mordisco → Rugido → Lacerar → Magullar > 35 ira | Method + wowforeverprogress |
+| Estadísticas | Orientativas | DPS de arma × 2,5 en forma; 14 PA = 1 DPS de arma; aguante y armadura para el oso | Method |
+| Tauren | Valores sin confirmar | Robustez +5 % vida; Pisotón TdR 1,5 min | wowforeverprogress |
+| Misiones de forma | Orientativas | **Confirmadas** con NPC y coordenadas (oso 10, veneno 14, acuática 16, **gato 20 por misión**) | NorgannonDB |
+| Iconos de hechizos | Propios | **Reales** (Wowhead Forever; incluidos Mordisco primigenio, Poder cambiante y Revivir) | Wowhead |
+
+Discrepancias que siguen abiertas (marcadas en la app): niveles exactos del orden de talentos entre guías; tope de golpe 8 % vs 9 %; armadura de Oso nefasto ×4,6 vs +360 %; Defensa 440; «Poised» (solo leprestore); Plainsrunning (solo wowclassicforever); Furor «muerto» (Method) vs útil (leprestore); Reacción natural (Method la desaconseja en bandas).
 
 ## Correcciones al borrador
 
@@ -51,7 +70,7 @@ Fuentes completas con fechas en `content/fuentes.json` (también en la pestaña 
 
 ## Pruebas ejecutadas (Windows 11, monitor real al 125 %)
 
-- `pytest`: 51 tests correctos (v1.2 añade los de hechizos y barras) (v1.1 añade los de progreso: guardado, ids únicos, capítulo actual, plegado automático, «Solo el actual», refresco del resumen e iconos). Cubren: contenido, ruta de talentos legal nivel a nivel (51 puntos, 41/10), detección de rutas ilegales, persistencia, recolocación entre monitores y ventana real (pestañas, chincheta, contraer, tamaño mínimo, restauración del estado).
+- `pytest`: 59 tests correctos (v1.3 añade parser Lua, misiones, mapa, iconos reales y árbol real; v1.2 hechizos y barras) (v1.1 añade los de progreso: guardado, ids únicos, capítulo actual, plegado automático, «Solo el actual», refresco del resumen e iconos). Cubren: contenido, ruta de talentos legal nivel a nivel (51 puntos, 41/10), detección de rutas ilegales, persistencia, recolocación entre monitores y ventana real (pestañas, chincheta, contraer, tamaño mínimo, restauración del estado).
 - **Chincheta**: verificada con `GetWindowLongPtr` (WS_EX_TOPMOST se activa y desactiva) en Python y en el `.exe`.
 - **Escalado**: 125 % real y 150 % / 200 % simulados con `QT_SCALE_FACTOR` al tamaño mínimo de 320×280. La chincheta y la cabecera se ven bien.
 - **`.exe`**: abre la ventana, 0 ms de CPU en 5 s de reposo, ~33 MB de memoria privada, guarda el estado y al cerrar no deja procesos.

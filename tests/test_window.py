@@ -81,7 +81,7 @@ def test_state_persisted_on_close(app, tmp_path):
     w.show()
     app.processEvents()
     w.set_pinned(False)
-    w.tabbar.setCurrentIndex(2)
+    w.tabbar.setCurrentIndex(w.tab_ids.index("talentos"))
     w.move(150, 160)
     w.resize(420, 540)
     app.processEvents()

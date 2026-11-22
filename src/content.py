@@ -7,7 +7,7 @@ from pathlib import Path
 
 BLOCK_TYPES = {"texto", "lista", "tabla", "aviso", "tarjeta", "talentos", "indice", "fuentes",
                "checklist", "imagen", "progreso", "controles",
-               "entrenamiento", "presets", "hechizos_todos", "leyenda_hechizos"}
+               "entrenamiento", "presets", "hechizos_todos", "leyenda_hechizos", "misiones"}
 
 
 def base_dir() -> Path:
@@ -51,6 +51,12 @@ def load_guide(folder: Path | None = None) -> dict:
         ids = [t["id"] for t in guide["tabs"]]
         pos = ids.index("talentos") + 1 if "talentos" in ids else len(ids)
         guide["tabs"][pos:pos] = spells.build_tabs(data)
+    import quests  # import local: quests depende de este módulo
+    qdata = quests.load_quests()
+    guide["_misiones"] = qdata
+    ids = [t["id"] for t in guide["tabs"]]
+    pos = ids.index("ruta") + 1 if "ruta" in ids else len(ids)
+    guide["tabs"].insert(pos, quests.build_tab(qdata))
     validate_guide(guide)
     try:
         guide["_fuentes"] = load_json("fuentes.json", folder)

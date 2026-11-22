@@ -55,11 +55,21 @@ def resolve_image(url: QUrl) -> QImage | None:
         file = base_dir() / path if path.startswith("assets/") else content_dir() / path
         scale = 3
     elif scheme in ("spell", "spellg", "spellup"):
-        file = base_dir() / "assets" / "spells" / f"{path}.svg"
-        if not file.is_file():
-            return None
-        img = _spell_variant(_render_svg(file, 3), scheme)
+        real = base_dir() / "assets" / "blizzard" / "icons" / f"{_REG['spell_icons'].get(path, '')}.jpg"
+        if _REG["spell_icons"].get(path) and real.is_file():
+            base = QImage(str(real))              # icono real de Blizzard (descargado para uso personal)
+        else:
+            file = base_dir() / "assets" / "spells" / f"{path}.svg"
+            if not file.is_file():
+                return None
+            base = _render_svg(file, 3)           # icono propio de respaldo
+        img = _spell_variant(base, scheme)
         _IMG_CACHE[key] = img
+        return img
+    elif scheme == "qmap":
+        img = _quest_map(path)
+        if img is not None:
+            _IMG_CACHE[key] = img
         return img
     else:
         return None
@@ -67,6 +77,53 @@ def resolve_image(url: QUrl) -> QImage | None:
         return None
     img = _render_svg(file, scale) if file.suffix.lower() == ".svg" else QImage(str(file))
     _IMG_CACHE[key] = img
+    return img
+
+
+_REG: dict = {"spell_icons": {}, "quests": {}}
+
+
+def register_guide(guide: dict) -> None:
+    """Datos que necesitan las imágenes: icono real de cada hechizo y misiones por id."""
+    spells_data = guide.get("_hechizos") or {}
+    _REG["spell_icons"] = {sid: sp.get("icono_wow") for sid, sp in spells_data.get("hechizos", {}).items()}
+    _REG["quests"] = (guide.get("_misiones") or {}).get("index", {})
+    _IMG_CACHE.clear()
+
+
+def _marker(p: QPainter, x: float, y: float, r: float, fill: str, symbol: str) -> None:
+    p.setPen(QPen(QColor("#000000"), r * 0.28))
+    p.setBrush(QColor(fill))
+    p.drawEllipse(QRectF(x - r, y - r, 2 * r, 2 * r))
+    f = QFont("Segoe UI")
+    f.setPixelSize(int(r * 1.5))
+    f.setBold(True)
+    p.setFont(f)
+    p.setPen(QColor("#000000"))
+    p.drawText(QRectF(x - r, y - r, 2 * r, 2 * r), Qt.AlignCenter, symbol)
+
+
+def _quest_map(path: str) -> QImage | None:
+    """qmap:<id>:<ini|fin> → mapa real de la zona con «!» (inicio) y «?» (entrega) si están en él."""
+    try:
+        qid_s, which = path.split(":")
+        q = _REG["quests"][int(qid_s)]
+    except (ValueError, KeyError):
+        return None
+    anchor = q.get(which) or {}
+    area = anchor.get("a")
+    file = base_dir() / "assets" / "blizzard" / "maps" / f"{area}.jpg"
+    if not area or not file.is_file():
+        return None
+    img = QImage(str(file)).convertToFormat(QImage.Format_ARGB32_Premultiplied)
+    p = QPainter(img)
+    p.setRenderHint(QPainter.Antialiasing)
+    r = img.width() / 52
+    for key, fill, sym in (("fin", "#5fb4ff", "?"), ("ini", "#ffd34d", "!")):
+        pt = q.get(key) or {}
+        if pt.get("a") == area and "x" in pt:
+            _marker(p, pt["x"] / 100 * img.width(), pt["y"] / 100 * img.height(), r, fill, sym)
+    p.end()
     return img
 
 
@@ -90,7 +147,7 @@ def _spell_variant(base: QImage, scheme: str) -> QImage:
         p.drawImage(0, 0, raw.convertToFormat(QImage.Format_Grayscale8))
     else:
         p.drawImage(0, 0, raw)
-        bw, bh = w * 0.62, h * 0.44
+        bw, bh = w * 0.54, h * 0.38
         badge = QRectF(w - bw, 0, bw, bh)
         p.setPen(QPen(QColor("#ffffff"), max(1.0, w / 32)))
         p.setBrush(QColor("#2f8a33"))
@@ -126,6 +183,8 @@ class OverlayWindow(QWidget):
         self.progress_file = progress_file
         self.progress = progress if progress is not None else load_progress(progress_file)
         self._dirty: set[str] = set()
+        self.view: dict = {"quest": None}       # misión seleccionada (muestra su mapa)
+        register_guide(guide)
         self.setObjectName("root")
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setWindowTitle("Feral Companion — Forever Overlay")
@@ -171,7 +230,7 @@ class OverlayWindow(QWidget):
             self.browsers[tab["id"]] = br
             self.tabs_by_id[tab["id"]] = tab
             self.tab_ids.append(tab["id"])
-            br.setHtml(render_tab(guide, tab, self.progress))
+            br.setHtml(render_tab(guide, tab, self.progress, self.view))
         self.tabbar.setIconSize(QSize(14, 14))
         self.tabbar.currentChanged.connect(self._on_tab)
 
@@ -268,7 +327,7 @@ class OverlayWindow(QWidget):
         br = self.browsers[tid]
         sb = br.verticalScrollBar()
         pos = sb.value()
-        br.setHtml(render_tab(self.guide, self.tabs_by_id[tid], self.progress))
+        br.setHtml(render_tab(self.guide, self.tabs_by_id[tid], self.progress, self.view))
         sb.setValue(pos)
         QTimer.singleShot(0, lambda: sb.setValue(pos))
         self._dirty.discard(tid)
@@ -316,7 +375,7 @@ class OverlayWindow(QWidget):
             if tid in self._dirty:
                 self.rerender(tid)
             if anchor:
-                self.progress.folded.discard(anchor)
+                self.open_section(tid, anchor)
                 self.rerender(tid)
                 QTimer.singleShot(0, lambda: self.browsers[tid].scrollToAnchor(anchor))
 
@@ -330,10 +389,25 @@ class OverlayWindow(QWidget):
             self.run_command(url.path(), tid)
         elif scheme == "goto":
             self.go_to(url.path(), url.fragment())
+        elif scheme == "quest":
+            self.select_quest(int(url.path()), tid)
         elif scheme in ("http", "https"):
             QDesktopServices.openUrl(url)   # solo si el usuario hace clic en una fuente
         elif url.hasFragment():
             self.browsers[tid].scrollToAnchor(url.fragment())
+
+    def open_section(self, tid: str, sid: str) -> None:
+        """Abre una sección respetando si empieza plegada o abierta."""
+        sec = next((s for s in self.tabs_by_id[tid]["secciones"] if s.get("ancla") == sid), {})
+        if sec.get("plegado_inicial"):
+            self.progress.folded.add(sid)
+        else:
+            self.progress.folded.discard(sid)
+
+    def select_quest(self, qid: int, tid: str = "misiones") -> None:
+        """Clic en una misión: muestra (o esconde) su mapa debajo."""
+        self.view["quest"] = None if self.view.get("quest") == qid else qid
+        self.rerender(tid)
 
     def reset_progress(self) -> None:
         ans = QMessageBox.question(self, "Reiniciar progreso",

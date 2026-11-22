@@ -11,6 +11,9 @@ if not exist .venv\Scripts\python.exe (
 .venv\Scripts\python -m pip install --quiet --upgrade pip
 .venv\Scripts\python -m pip install --quiet -r requirements.txt pyinstaller pytest || goto :error
 
+echo Descargando iconos, mapas y misiones (solo lo que falte, uso personal)...
+.venv\Scripts\python scripts\fetch_blizzard_assets.py || goto :error
+
 echo Ejecutando tests...
 .venv\Scripts\python -m pytest -q || goto :error
 
@@ -22,6 +25,7 @@ echo Ejecutando tests...
     --paths src ^
     --add-data "content;content" ^
     --add-data "assets;assets" ^
+    --add-data "data;data" ^
     --exclude-module PySide6.QtNetwork ^
     --exclude-module PySide6.QtQml ^
     --exclude-module PySide6.QtQuick ^

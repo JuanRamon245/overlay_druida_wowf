@@ -12,10 +12,11 @@ from __future__ import annotations
 import html
 import re
 
+import quests
 import spells
 from content import expand_route, tree_totals
-from progress import (Progress, chapter_label, chapters, current_chapter, section_id, section_status,
-                      summary, talent_check_id)
+from progress import (Progress, chapter_label, chapters, current_chapter, is_folded, section_id,
+                      section_status, summary, talent_check_id)
 
 # Paleta (se repite en theme.py para QSS)
 GOLD = "#d4ad62"
@@ -240,8 +241,10 @@ def _fuentes(guide):
     return "".join(out)
 
 
-def render_block(guide, tab, blk, checks=frozenset()):
+def render_block(guide, tab, blk, checks=frozenset(), view=None):
     t = blk["tipo"]
+    if t == "misiones":
+        return _quest_list(guide, blk, checks, (view or {}).get("quest"))
     if t == "texto":
         return f'<p style="margin-top:0px; margin-bottom:6px;">{inline(blk["texto"])}</p>'
     if t == "lista":
@@ -430,7 +433,7 @@ def _section_header(sec, sid, folded, st, is_current):
             f'<span style="color:{MUTED};">{arrow}</span> {ic}{html.escape(sec["titulo"])}</a>{extra}</h3>')
 
 
-def render_tab(guide: dict, tab: dict, progress: Progress | None = None) -> str:
+def render_tab(guide: dict, tab: dict, progress: Progress | None = None, view: dict | None = None) -> str:
     checks = progress.checks if progress else set()
     folded = progress.folded if progress else set()
     cur = current_chapter(guide, checks, tab["id"]) if tab["id"] in ("ruta", "hechizos", "barras") else None
@@ -442,14 +445,86 @@ def render_tab(guide: dict, tab: dict, progress: Progress | None = None) -> str:
                      f' · cliente {html.escape(meta["cliente_revisado"].split(" ")[0])}</p>')
     for i, sec in enumerate(tab.get("secciones", [])):
         sid = section_id(tab, i, sec)
-        is_folded = sid in folded
-        parts.append(_section_header(sec, sid, is_folded, section_status(sec, checks), sec is cur))
-        if is_folded:
+        folded_now = is_folded(sec, sid, folded)
+        parts.append(_section_header(sec, sid, folded_now, section_status(sec, checks), sec is cur))
+        if folded_now:
             continue
         for blk in sec.get("bloques", []):
-            parts.append(render_block(guide, tab, blk, checks))
+            parts.append(render_block(guide, tab, blk, checks, view))
     parts.append("</body></html>")
     return "".join(parts)
+
+
+def _quest_point(data, p, symbol, color):
+    if not p:
+        return ""
+    if p.get("t") == "item":
+        return f'<span style="color:{color}; font-weight:700;">{symbol}</span> Empieza con un objeto (botín).'
+    where = quests.zone_name(data, p.get("a"))
+    coords = f' ({p["x"]:.1f}, {p["y"]:.1f})' if "x" in p else " (dentro de mazmorra)"
+    kind = "" if p.get("t") == "npc" else " [objeto]"
+    return (f'<span style="color:{color}; font-weight:700;">{symbol}</span> '
+            f'<b>{html.escape(p.get("n", "?"))}</b>{kind} · {html.escape(where)}'
+            f'<span style="color:{MUTED};">{coords}</span>')
+
+
+def _quest_detail(data, q):
+    ini, fin = q.get("ini"), q.get("fin")
+    out = ['<table width="100%" cellspacing="0" cellpadding="4" style="margin-bottom:4px;">'
+           f'<tr><td style="background:{ROW_B};">']
+    if ini and "x" in ini:
+        out.append(f'<img src="qmap:{q["id"]}:ini" width="300" height="200"><br>')
+    elif fin and "x" in fin:
+        out.append(f'<img src="qmap:{q["id"]}:fin" width="300" height="200"><br>')
+    out.append(_quest_point(data, ini, "!", "#ffd34d") + "<br>")
+    if fin:
+        out.append(_quest_point(data, fin, "?", "#5fb4ff") + "<br>")
+    if ini and fin and "x" in fin and fin.get("a") != ini.get("a") and "x" in ini:
+        out.append(f'<img src="qmap:{q["id"]}:fin" width="300" height="200"><br>')
+    if q.get("pre"):
+        names = ", ".join(html.escape(n) for _, n in q["pre"])
+        out.append(f'<span style="color:{AMBER};">Requiere antes:</span> {names}<br>')
+    out.append(f'<a href="{quests.wowhead_url(q["id"])}" style="color:{GOLD};">Ver en Wowhead</a>'
+               f' <span style="color:{MUTED}; font-size:small;">(abre el navegador)</span>')
+    out.append("</td></tr></table>")
+    return "".join(out)
+
+
+def _quest_list(guide, blk, checks, selected):
+    data = guide.get("_misiones")
+    if not data:
+        return ""
+    idx = data["index"]
+    by_zone: dict[str, list] = {}
+    for qid in blk["ids"]:
+        q = idx[qid]
+        by_zone.setdefault(quests.zone_name(data, q.get("zona")), []).append(q)
+    out = []
+    for zone in sorted(by_zone):
+        out.append(f'<p style="margin-top:4px; margin-bottom:1px; color:{GOLD};">'
+                   f'{icon("ruta", 12)} {html.escape(zone)}</p>')
+        rows: list[str] = []
+        table_open = ('<table width="100%" cellspacing="0" cellpadding="1" style="margin-bottom:4px;">')
+        for q in by_zone[zone]:
+            cid = f"q{q['id']}"
+            done = cid in checks
+            sel = q["id"] == selected
+            color = DONE if done else (GOLD if sel else TEXT)
+            tags = f' <span style="color:{GREEN}; font-size:small;">[druida]</span>' if q.get("clase") else ""
+            arrow = "▾" if sel else "▸"
+            giver = q.get("ini", {}).get("n")
+            sub = f'<br><span style="color:{MUTED}; font-size:small;">de {html.escape(giver)}</span>' if giver else ""
+            rows.append(f'<tr><td width="20" valign="top">{checkbox(cid, done)}</td>'
+                        f'<td width="24" valign="top" style="color:{MUTED}; font-size:small;">[{q["lv"]}]</td>'
+                        f'<td valign="top"><a href="quest:{q["id"]}" style="color:{color}; text-decoration:none;">'
+                        f'<span style="color:{MUTED};">{arrow}</span> {html.escape(q["n"])}</a>{tags}{sub}</td></tr>')
+            if sel:   # el detalle va fuera de la tabla para no descuadrar las columnas
+                out.append(table_open + "".join(rows) + "</table>")
+                out.append(f'<a name="qsel"></a>{_quest_detail(data, q)}')
+                rows = []
+        if rows:
+            out.append(table_open + "".join(rows) + "</table>")
+    return "".join(out)
 
 
 __all__ = ["render_tab", "render_block", "inline", "chapter_label", "chapters"]

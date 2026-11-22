@@ -1,18 +1,152 @@
 {
-  "fecha_revision": "2026-11-15",
+  "fecha_revision": "2026-11-22",
   "fuentes": [
-    {"titulo": "Blizzard · Class Deep Dives: Hunter and Druid", "url": "https://worldofwarcraft.blizzard.com/en-us/news/24301515", "fecha": "2026-09-30", "estado": "leída", "uso": "Cambios de árboles, formas, consumibles en forma, DPS de arma, raciales en forma, especialización dual al 40"},
-    {"titulo": "Blizzard · Gather Around the Campfire", "url": "https://worldofwarcraft.blizzard.com/en-us/news/24301516", "fecha": "2026-10-21", "estado": "leída", "uso": "Funcionamiento de acampadas, objetos de habilidad 20, exclusividad con buffs de clase"},
-    {"titulo": "Blizzard · WoW: Forever Now Live!", "url": "https://worldofwarcraft.blizzard.com/en-us/news/24315820/", "fecha": "2026-11-04", "estado": "leída", "uso": "Lanzamiento, zonas, bandas del 9/12"},
-    {"titulo": "Blizzard · What's New and What Feels Familiar", "url": "https://worldofwarcraft.blizzard.com/en-us/news/24315821/", "fecha": "2026-11-03", "estado": "leída", "uso": "Legado (16 puntos/personaje), ajustes de experiencia, reglas"},
-    {"titulo": "Blizzard · What's Next panel recap", "url": "https://worldofwarcraft.blizzard.com/en-us/news/24303862/world-of-warcraft-forever-whats-next", "fecha": "2026-09-12", "estado": "leída", "uso": "Fecha de lanzamiento, 9 mazmorras, hoja de ruta"},
-    {"titulo": "Blizzard · Legacy System", "url": "https://worldofwarcraft.blizzard.com/news/24307383", "fecha": "2026-09-23", "estado": "leída", "uso": "Desbloqueo al 25, 65 desafíos, nombres y efectos de ventajas"},
-    {"titulo": "Blizzard · Nuevas mazmorras", "url": "https://worldofwarcraft.blizzard.com/news/24301455", "fecha": "2026-10-20", "estado": "leída", "uso": "Nombres, rangos de nivel, ubicación y sintonización de Dalaran"},
-    {"titulo": "Blizzard EU · Beta Development Notes (act. 3 nov)", "url": "https://eu.forums.blizzard.com/en/wow/t/wow-forever-beta-development-notes-%E2%80%93-updated-3-november/631316", "fecha": "2026-11-03", "estado": "leída parcialmente", "uso": "Furor↔Corazón de lo Salvaje, Berserk eliminado, Lacerar talento, Rend and Tear, Naturalist"},
-    {"titulo": "wofwforever · Druid leveling talents", "url": "https://www.wofwforever.com/en/guides/wow-forever-druid-leveling-talents/", "fecha": "2026-11-15", "estado": "leída", "uso": "Umbrales 11/16/21/31 puntos, orden de leveo gato/oso, rangos de Lacerar"},
-    {"titulo": "wow-professions · Camping guide", "url": "https://www.wow-professions.com/forever/camping-guide", "fecha": "sin fecha", "estado": "leída", "uso": "Objetos de acampada de Minería e Ingeniería (20/140/300), niveles de fogata"},
-    {"titulo": "Hotfix 8/11/2026 (XP de mazmorras 40 % → 60 %)", "url": "https://worldofwarcraft.blizzard.com/news/24307310/", "fecha": "2026-11-08", "estado": "vía prensa (warcrafttavern, mein-mmo)", "uso": "XP por muerte en mazmorras"},
-    {"titulo": "Wowhead Forever · talent-builds-pve-tank / talent-calc", "url": "https://www.wowhead.com/forever/guide/classes/druid/feral/talent-builds-pve-tank", "fecha": "2026-11-04", "estado": "no legible (contenido dinámico)", "uso": "—"},
-    {"titulo": "Icy Veins · Druid class quests", "url": "https://www.icy-veins.com/wow-forever/druid-class-quests", "fecha": "—", "estado": "bloqueada (403)", "uso": "— (misiones de clase quedan orientativas)"}
+    {
+      "titulo": "Blizzard · Class Deep Dives: Hunter and Druid",
+      "url": "https://worldofwarcraft.blizzard.com/en-us/news/24301515",
+      "fecha": "2026-09-30",
+      "estado": "leída",
+      "uso": "Cambios de árboles, formas, consumibles en forma, DPS de arma, raciales en forma, especialización dual al 40"
+    },
+    {
+      "titulo": "Blizzard · Gather Around the Campfire",
+      "url": "https://worldofwarcraft.blizzard.com/en-us/news/24301516",
+      "fecha": "2026-10-21",
+      "estado": "leída",
+      "uso": "Funcionamiento de acampadas, objetos de habilidad 20, exclusividad con buffs de clase"
+    },
+    {
+      "titulo": "Blizzard · WoW: Forever Now Live!",
+      "url": "https://worldofwarcraft.blizzard.com/en-us/news/24315820/",
+      "fecha": "2026-11-04",
+      "estado": "leída",
+      "uso": "Lanzamiento, zonas, bandas del 9/12"
+    },
+    {
+      "titulo": "Blizzard · What's New and What Feels Familiar",
+      "url": "https://worldofwarcraft.blizzard.com/en-us/news/24315821/",
+      "fecha": "2026-11-03",
+      "estado": "leída",
+      "uso": "Legado (16 puntos/personaje), ajustes de experiencia, reglas"
+    },
+    {
+      "titulo": "Blizzard · What's Next panel recap",
+      "url": "https://worldofwarcraft.blizzard.com/en-us/news/24303862/world-of-warcraft-forever-whats-next",
+      "fecha": "2026-09-12",
+      "estado": "leída",
+      "uso": "Fecha de lanzamiento, 9 mazmorras, hoja de ruta"
+    },
+    {
+      "titulo": "Blizzard · Legacy System",
+      "url": "https://worldofwarcraft.blizzard.com/news/24307383",
+      "fecha": "2026-09-23",
+      "estado": "leída",
+      "uso": "Desbloqueo al 25, 65 desafíos, nombres y efectos de ventajas"
+    },
+    {
+      "titulo": "Blizzard · Nuevas mazmorras",
+      "url": "https://worldofwarcraft.blizzard.com/news/24301455",
+      "fecha": "2026-10-20",
+      "estado": "leída",
+      "uso": "Nombres, rangos de nivel, ubicación y sintonización de Dalaran"
+    },
+    {
+      "titulo": "Blizzard EU · Beta Development Notes (act. 3 nov)",
+      "url": "https://eu.forums.blizzard.com/en/wow/t/wow-forever-beta-development-notes-%E2%80%93-updated-3-november/631316",
+      "fecha": "2026-11-03",
+      "estado": "leída parcialmente",
+      "uso": "Furor↔Corazón de lo Salvaje, Berserk eliminado, Lacerar talento, Rend and Tear, Naturalist"
+    },
+    {
+      "titulo": "wofwforever · Druid leveling talents",
+      "url": "https://www.wofwforever.com/en/guides/wow-forever-druid-leveling-talents/",
+      "fecha": "2026-11-15",
+      "estado": "leída",
+      "uso": "Umbrales 11/16/21/31 puntos, orden de leveo gato/oso, rangos de Lacerar"
+    },
+    {
+      "titulo": "wow-professions · Camping guide",
+      "url": "https://www.wow-professions.com/forever/camping-guide",
+      "fecha": "sin fecha",
+      "estado": "leída",
+      "uso": "Objetos de acampada de Minería e Ingeniería (20/140/300), niveles de fogata"
+    },
+    {
+      "titulo": "Hotfix 8/11/2026 (XP de mazmorras 40 % → 60 %)",
+      "url": "https://worldofwarcraft.blizzard.com/news/24307310/",
+      "fecha": "2026-11-08",
+      "estado": "vía prensa (warcrafttavern, mein-mmo)",
+      "uso": "XP por muerte en mazmorras"
+    },
+    {
+      "titulo": "Wowhead Forever · talent-builds-pve-tank / talent-calc",
+      "url": "https://www.wowhead.com/forever/guide/classes/druid/feral/talent-builds-pve-tank",
+      "fecha": "2026-11-04",
+      "estado": "no legible (contenido dinámico)",
+      "uso": "—"
+    },
+    {
+      "titulo": "Icy Veins · Druid class quests",
+      "url": "https://www.icy-veins.com/wow-forever/druid-class-quests",
+      "fecha": "—",
+      "estado": "bloqueada (403)",
+      "uso": "— (misiones de clase confirmadas después con NorgannonDB)"
+    },
+    {
+      "titulo": "wowclassicforever.info · Árbol de talentos de druida",
+      "url": "https://wowclassicforever.info/talent/druid/",
+      "fecha": "2026-11-12",
+      "estado": "leída",
+      "uso": "Filas, rangos máximos y prerrequisitos del árbol Feral (build 1.60.1.71037)"
+    },
+    {
+      "titulo": "wowforeverprogress · Feral Tank (Tinu)",
+      "url": "https://wowforeverprogress.com/en/siniflar/druid/feral-tank",
+      "fecha": "2026-11-15",
+      "estado": "leída",
+      "uso": "Árbol por filas, build 0/46/5, prioridad de oso, +5 % vida tauren, Corazón de lo Salvaje +20 % aguante"
+    },
+    {
+      "titulo": "Method · Feral Tank Druid (Perseis)",
+      "url": "https://www.method.gg/wow-forever/class-guides/feral-tank-druid/talents",
+      "fecha": "2026-11-04",
+      "estado": "leída",
+      "uso": "Build híbrida oso/gato, prioridad de rotación, estadísticas (DPS de arma ×2,5)"
+    },
+    {
+      "titulo": "leprestore · Feral Druid Guide (Graham Smith)",
+      "url": "https://leprestore.com/guides/world-of-warcraft-forever/wow-forever-feral-druid-guide-best-builds-rotation-tanking-race-professions/",
+      "fecha": "2026-11-06",
+      "estado": "leída",
+      "uso": "Prerrequisitos (Poder cambiante ← Disciplina depredadora), build híbrida 0/46/5"
+    },
+    {
+      "titulo": "Muchamiel · Druid guide",
+      "url": "https://muchamielwow.github.io/en/druid/",
+      "fecha": "2026-11-14",
+      "estado": "leída",
+      "uso": "Misiones de forma, orden de leveo oso y gato, prioridades"
+    },
+    {
+      "titulo": "NorgannonDB (GPL-3.0)",
+      "url": "https://github.com/zmarotrix/NorgannonDB",
+      "fecha": "2026-11-19",
+      "estado": "descargada",
+      "uso": "Las 2.527 misiones para tauren druida, PNJ y coordenadas; misiones de clase"
+    },
+    {
+      "titulo": "Wowhead Forever · iconos y mapas",
+      "url": "https://www.wowhead.com/forever",
+      "fecha": "2026-11-22",
+      "estado": "descargados (uso personal)",
+      "uso": "Iconos reales de hechizos y mapas de zona de Forever"
+    },
+    {
+      "titulo": "Wowhead / Mobalytics / wowfdb / foreverspec / wow4ever",
+      "url": "https://www.wowhead.com/forever/guide/classes/druid/feral/overview-pve-tank",
+      "fecha": "2026-11-14",
+      "estado": "no legibles (JS, 403 o certificado)",
+      "uso": "—"
+    }
   ]
 }

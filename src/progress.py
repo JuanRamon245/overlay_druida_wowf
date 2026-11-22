@@ -71,7 +71,14 @@ def checklist_items(sec: dict) -> list[dict]:
             out.extend(blk["items"])
         elif blk.get("tipo") == "tabla" and "ids" in blk:   # filas marcables: siempre opcionales
             out.extend({"id": i, "texto": "", "opcional": True} for i in blk["ids"])
+        elif blk.get("tipo") == "misiones":                  # misiones: opcionales, no bloquean nada
+            out.extend({"id": f"q{i}", "texto": "", "opcional": True} for i in blk["ids"])
     return out
+
+
+def is_folded(sec: dict, sid: str, folded: set[str]) -> bool:
+    """Las secciones con «plegado_inicial» empiezan plegadas: estar en `folded` significa abierta."""
+    return (sid in folded) != bool(sec.get("plegado_inicial"))
 
 
 def section_status(sec: dict, checks: set[str]) -> dict:
@@ -107,8 +114,8 @@ def _start_level(sec: dict) -> int:
 
 
 def current_chapter(guide: dict, checks: set[str], tab_id: str = "ruta") -> dict | None:
-    if tab_id == "barras":   # el tramo de barras sigue al capítulo actual de la Ruta
-        tab = next((t for t in guide["tabs"] if t["id"] == "barras"), None)
+    if tab_id in ("barras", "misiones"):   # siguen al capítulo actual de la Ruta
+        tab = next((t for t in guide["tabs"] if t["id"] == tab_id), None)
         if tab is None:
             return None
         bands = [s for s in tab["secciones"] if s.get("ancla")]

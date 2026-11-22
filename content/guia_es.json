@@ -3,58 +3,64 @@
     "titulo": "FERAL 1–60",
     "subtitulo": "Druida tauren · Oso / Gato · 1–60",
     "juego": "World of Warcraft: Forever",
-    "cliente_revisado": "1.60.1 (lanzamiento 4/11/2026 + hotfixes hasta 13/11/2026)",
-    "fecha_revision": "2026-11-15",
-    "version_contenido": "1.1.0"
+    "cliente_revisado": "1.60.1 (build 71037, hotfixes hasta 19/11/2026)",
+    "fecha_revision": "2026-11-22",
+    "version_contenido": "1.3.0"
   },
   "talentos": {
-    "validado_con": "Forever 1.60.1 · notas de desarrollo Blizzard (24/09–03/11/2026) + guía de leveo wofwforever (rev. 15/11/2026)",
-    "nota": "Filas exactas del árbol live no publicadas en texto: los requisitos de puntos (req) de talentos sin umbral oficial son orientativos.",
+    "validado_con": "Árbol live 1.60.1 (wowclassicforever.info, build 1.60.1.71037; wowforeverprogress, talentos a 13/11/2026). Ruta revisada el 22/11/2026 con Method, leprestore y Muchamiel",
+    "nota": "Filas y prerrequisitos del árbol Feral confirmados por dos fuentes independientes. La fila de Naturalista (Restauración) es orientativa.",
     "arboles": {
       "Combate feral": {
         "Ferocity": {"es": "Ferocidad", "max": 5, "req": 0, "certeza": "confirmado"},
-        "Feral Swiftness": {"es": "Presteza feral", "max": 2, "req": 5, "certeza": "orientativo"},
-        "Furor": {"es": "Furor", "max": 5, "req": 5, "certeza": "orientativo"},
-        "Thick Hide": {"es": "Pellejo grueso", "max": 3, "req": 5, "certeza": "orientativo"},
+        "Furor": {"es": "Furor", "max": 5, "req": 0, "certeza": "confirmado"},
+        "Feral Swiftness": {"es": "Presteza feral", "max": 2, "req": 5, "certeza": "confirmado"},
+        "Feral Instinct": {"es": "Instinto feral", "max": 3, "req": 5, "certeza": "confirmado"},
+        "Brutal Impact": {"es": "Impacto brutal", "max": 2, "req": 5, "certeza": "confirmado"},
+        "Thick Hide": {"es": "Pellejo grueso", "max": 3, "req": 5, "certeza": "confirmado"},
+        "Shredding Attacks": {"es": "Ataques trituradores", "max": 3, "req": 10, "certeza": "confirmado"},
+        "Savage Fury": {"es": "Furia salvaje", "max": 2, "req": 10, "certeza": "confirmado"},
         "Feral Charge": {"es": "Carga feral", "max": 1, "req": 10, "certeza": "confirmado"},
-        "Savage Fury": {"es": "Furia salvaje", "max": 2, "req": 10, "certeza": "orientativo"},
-        "Sharpened Claws": {"es": "Garras afiladas", "max": 2, "req": 10, "certeza": "orientativo"},
-        "Shredding Attacks": {"es": "Ataques trituradores", "max": 3, "req": 10, "certeza": "orientativo"},
-        "Feral Instinct": {"es": "Instinto feral", "max": 3, "req": 10, "certeza": "orientativo"},
-        "Lacerate": {"es": "Lacerar", "max": 1, "req": 15, "certeza": "confirmado"},
+        "Sharpened Claws": {"es": "Garras afiladas", "max": 2, "req": 10, "certeza": "confirmado"},
+        "Predatory Strikes": {"es": "Golpes depredadores", "max": 3, "req": 15, "certeza": "confirmado"},
+        "Lacerate": {
+          "es": "Lacerar",
+          "max": 1,
+          "req": 15,
+          "certeza": "confirmado",
+          "prereq": ["Savage Fury", 2]
+        },
         "Predatory Discipline": {"es": "Disciplina depredadora", "max": 1, "req": 15, "certeza": "confirmado"},
         "Blood Frenzy": {
           "es": "Frenesí sangriento",
           "max": 2,
           "req": 15,
-          "certeza": "orientativo",
+          "certeza": "confirmado",
           "prereq": ["Sharpened Claws", 2]
         },
-        "Predatory Strikes": {"es": "Golpes depredadores", "max": 3, "req": 15, "certeza": "orientativo"},
         "Leader of the Pack": {"es": "Líder de la manada", "max": 1, "req": 20, "certeza": "confirmado"},
-        "Natural Instinct": {"es": "Instinto natural", "max": 2, "req": 20, "certeza": "orientativo"},
-        "Rend and Tear": {"es": "Desgarrar y rasgar", "max": 5, "req": 25, "certeza": "orientativo"},
-        "Natural Reaction": {"es": "Reacción natural", "max": 5, "req": 25, "certeza": "orientativo"},
-        "Shifting Power": {
-          "es": "Poder cambiante",
-          "max": 1,
-          "req": 30,
+        "Natural Instinct": {"es": "Instinto natural", "max": 2, "req": 20, "certeza": "confirmado"},
+        "Rend and Tear": {
+          "es": "Desgarrar y rasgar",
+          "max": 5,
+          "req": 25,
           "certeza": "confirmado",
-          "prereq": ["Shredding Attacks", 1]
+          "prereq": ["Predatory Strikes", 3]
         },
+        "Natural Reaction": {"es": "Reacción natural", "max": 5, "req": 25, "certeza": "confirmado"},
         "Primal Bite": {
           "es": "Mordisco primigenio",
           "max": 1,
           "req": 30,
           "certeza": "confirmado",
-          "prereq": ["Savage Fury", 2]
+          "prereq": ["Leader of the Pack", 1]
         },
-        "Improved Shifting Power": {
-          "es": "Poder cambiante mejorado",
-          "max": 2,
+        "Shifting Power": {
+          "es": "Poder cambiante",
+          "max": 1,
           "req": 30,
-          "certeza": "orientativo",
-          "prereq": ["Shifting Power", 1]
+          "certeza": "confirmado",
+          "prereq": ["Predatory Discipline", 1]
         }
       },
       "Restauración": {
@@ -76,94 +82,80 @@
         "hasta": 16,
         "arbol": "Combate feral",
         "talento": "Feral Swiftness",
-        "funcion": "Velocidad en gato (también en interiores) + esquiva siempre."
+        "funcion": "Esquiva siempre + velocidad en gato (también en interiores)."
       },
-      {"desde": 17, "hasta": 19, "arbol": "Combate feral", "talento": "Furor", "funcion": "Recursos al cambiar de forma."},
       {
-        "desde": 20,
-        "hasta": 20,
+        "desde": 17,
+        "hasta": 19,
         "arbol": "Combate feral",
-        "talento": "Feral Charge",
-        "funcion": "Carga en oso; en Forever también versión gato (TdR 30 s)."
+        "talento": "Feral Instinct",
+        "funcion": "Más daño de Flagelo (oso en área) y mejor sigilo. Ya no da amenaza."
       },
+      {"desde": 20, "hasta": 20, "arbol": "Combate feral", "talento": "Feral Charge", "funcion": "Carga en oso; también versión gato (TdR 30 s)."},
       {
         "desde": 21,
         "hasta": 22,
         "arbol": "Combate feral",
         "talento": "Savage Fury",
-        "funcion": "Más daño de Zarpa, Arañazo, Magullar, Flagelo y Triturar. Prerrequisito de Mordisco primigenio."
+        "funcion": "Más daño de Zarpa, Arañazo, Magullar, Flagelo y Triturar. Requisito de Lacerar."
       },
-      {"desde": 23, "hasta": 24, "arbol": "Combate feral", "talento": "Sharpened Claws", "funcion": "Crítico en formas. Desbloquea Frenesí sangriento."},
+      {"desde": 23, "hasta": 24, "arbol": "Combate feral", "talento": "Sharpened Claws", "funcion": "Crítico en formas. Requisito de Frenesí sangriento."},
       {
         "desde": 25,
         "hasta": 25,
         "arbol": "Combate feral",
         "talento": "Lacerate",
-        "funcion": "Sangrado acumulable (5) con mucha amenaza. Clave para tanquear."
+        "funcion": "Sangrado acumulable ×5 con amenaza muy alta: tu herramienta de tanque."
       },
       {
         "desde": 26,
-        "hasta": 27,
+        "hasta": 26,
         "arbol": "Combate feral",
-        "talento": "Blood Frenzy",
-        "funcion": "Ira/puntos de combo extra con críticos (fusión de Primal Fury + Blood Frenzy)."
+        "talento": "Predatory Discipline",
+        "funcion": "Requisito de Poder cambiante (energía extra para el gato)."
       },
-      {"desde": 28, "hasta": 29, "arbol": "Combate feral", "talento": "Predatory Strikes", "funcion": "Más daño de crítico."},
+      {
+        "desde": 27,
+        "hasta": 29,
+        "arbol": "Combate feral",
+        "talento": "Predatory Strikes",
+        "funcion": "+20 % de daño crítico. Requisito de Desgarrar y rasgar."
+      },
       {
         "desde": 30,
         "hasta": 30,
         "arbol": "Combate feral",
         "talento": "Leader of the Pack",
-        "funcion": "Aura de crítico al grupo (no se acumula con Moonkin)."
+        "funcion": "Aura de crítico al grupo. Requisito de Mordisco primigenio."
       },
-      {"desde": 31, "hasta": 31, "arbol": "Combate feral", "talento": "Predatory Strikes", "funcion": "Completa 3/3."},
-      {
-        "desde": 32,
-        "hasta": 33,
-        "arbol": "Combate feral",
-        "talento": "Natural Instinct",
-        "funcion": "Mejora defensiva/sigilo (antes Predatory Instincts)."
-      },
-      {
-        "desde": 34,
-        "hasta": 34,
-        "arbol": "Combate feral",
-        "talento": "Shredding Attacks",
-        "funcion": "Triturar y Lacerar más baratos. Abre Poder cambiante."
-      },
+      {"desde": 31, "hasta": 32, "arbol": "Combate feral", "talento": "Natural Instinct", "funcion": "Talento nuevo de la fila 5."},
+      {"desde": 33, "hasta": 34, "arbol": "Combate feral", "talento": "Blood Frenzy", "funcion": "Ira y puntos de combo extra con críticos."},
       {
         "desde": 35,
         "hasta": 39,
         "arbol": "Combate feral",
         "talento": "Rend and Tear",
-        "funcion": "+3/6/9/12/15 % daño cuerpo a cuerpo a objetivos sangrando (Arañazo, Destripar, Lacerar)."
+        "funcion": "+3/6/9/12/15 % daño a objetivos que sangran (Arañazo, Destripar, Lacerar)."
       },
       {
         "desde": 40,
         "hasta": 40,
         "arbol": "Combate feral",
         "talento": "Primal Bite",
-        "funcion": "Oso: 20 de ira, 100 % daño de arma + bonus, amenaza muy alta. Rangos 2 y 3 en instructor."
+        "funcion": "Oso: 20 ira, daño de arma + bonus, amenaza muy alta. TdR 6 s."
       },
+      {"desde": 41, "hasta": 41, "arbol": "Combate feral", "talento": "Shifting Power", "funcion": "Gato: +40 energía al instante a cambio de maná."},
       {
-        "desde": 41,
-        "hasta": 41,
-        "arbol": "Combate feral",
-        "talento": "Shifting Power",
-        "funcion": "Gato: +40 de energía al instante a cambio de mucho maná."
-      },
-      {"desde": 42, "hasta": 43, "arbol": "Combate feral", "talento": "Furor", "funcion": "Furor 5/5: conservas energía de gato al entrar en oso."},
-      {"desde": 44, "hasta": 46, "arbol": "Combate feral", "talento": "Thick Hide", "funcion": "Armadura en formas (rediseñado en Forever)."},
-      {"desde": 47, "hasta": 48, "arbol": "Combate feral", "talento": "Shredding Attacks", "funcion": "Completa 3/3."},
-      {"desde": 49, "hasta": 50, "arbol": "Combate feral", "talento": "Natural Reaction", "funcion": "Oso: esquiva y 5 de ira al esquivar."},
-      {
-        "desde": 51,
-        "hasta": 55,
+        "desde": 42,
+        "hasta": 46,
         "arbol": "Restauración",
         "talento": "Heart of the Wild",
-        "funcion": "Aguante en oso, fuerza/int (bonus reducido en Forever)."
+        "funcion": "+20 % de aguante en oso: la mayor mejora defensiva disponible."
       },
-      {"desde": 56, "hasta": 60, "arbol": "Restauración", "talento": "Naturalist", "funcion": "+2/4/6/8/10 % a TODO el daño (y curas)."}
+      {"desde": 47, "hasta": 49, "arbol": "Combate feral", "talento": "Thick Hide", "funcion": "Armadura en formas."},
+      {"desde": 50, "hasta": 54, "arbol": "Restauración", "talento": "Naturalist", "funcion": "+2/4/6/8/10 % a TODO el daño (gato y oso)."},
+      {"desde": 55, "hasta": 59, "arbol": "Combate feral", "talento": "Natural Reaction", "funcion": "Oso: +esquiva y 5 de ira al esquivar."},
+      {"desde": 60, "hasta": 60, "arbol": "Combate feral", "talento": "Shredding Attacks", "funcion": "Triturar más barato y Lacerar con menos ira."}
     ]
   },
   "tabs": [
@@ -201,8 +193,9 @@
             {
               "tipo": "lista",
               "items": [
-                "**Robustez** (Endurance): más vida. Valor exacto en Forever: orientativo (las raciales se actualizaron).",
-                "**Pisotón de guerra** (War Stomp): aturde en área. **Usable en formas** en Forever (confirmado). Ideal para huir o salvar al sanador."
+                "**Robustez** (Endurance): **+5 % de vida** (wowforeverprogress).",
+                "**Pisotón de guerra** (War Stomp): aturdimiento en área, TdR 1,5 min. **Usable en formas**.",
+                "**Plainsrunning** (nueva en Forever, según wowclassicforever): velocidad creciente al correr; funciona en oso. Orientativo."
               ]
             }
           ]
@@ -218,7 +211,7 @@
                 ["12", "**Revivir** (Revive): resurrección fuera de combate, nueva"],
                 ["14", "Curar veneno (misión de clase, orientativo)"],
                 ["16", "**Forma acuática** (misión de clase, orientativo)"],
-                ["20", "**Forma felina** · **Presagio de claridad** (Omen of Clarity) ya es habilidad base"],
+                ["20", "**Forma felina** (misión «The Great Cat Spirit») · **Presagio de claridad** base"],
                 ["25", "**Lacerar** (talento) · primer punto de **Legado** (lo normal)"],
                 ["30", "Forma de viaje · Líder de la manada"],
                 ["40", "Oso nefasto · montura · **Especialización dual** · Mordisco primigenio"],
@@ -228,7 +221,7 @@
             {
               "tipo": "aviso",
               "estado": "orientativo",
-              "texto": "La pasiva «Poised» (nv 32) del borrador no aparece en ninguna fuente oficial: no se incluye como hecho."
+              "texto": "«Poised» al 32 solo lo menciona leprestore; ninguna otra guía ni la base de datos lo confirman."
             }
           ]
         },
@@ -649,31 +642,39 @@
           "icono": "talentos"
         },
         {
-          "titulo": "Cambios frente al borrador",
+          "titulo": "Por qué esta ruta (guías de Forever)",
+          "icono": "talentos",
           "bloques": [
             {
               "tipo": "lista",
               "items": [
-                "**Furor** está en el árbol **Feral** en el lanzamiento (se intercambió con Corazón de lo Salvaje, que pasó a Restauración).",
-                "**Mordisco primigenio** pasa al **40** (umbral de 31 puntos) y **Poder cambiante** al 41; antes del 40 ninguno es legal.",
-                "Se quita **Disciplina depredadora** (solo gato) para tener Lacerar en el único hueco de 16 puntos (nv 25).",
-                "**Instinto feral** se omite: en Forever ya no da amenaza en oso (solo daño de Flagelo y sigilo).",
-                "**Reacción natural** queda en 2/5 al 49–50 (era 1/5 al 60).",
-                "**Pellejo grueso** pasa de 52–54 a 44–46 (armadura en oso antes de las mazmorras de 45+).",
-                "El reparto final se mantiene en **0 / 41 / 10 = 51 puntos**."
+                "**Corrección importante:** la ruta anterior era ilegal. **Poder cambiante exige Disciplina depredadora** y **Mordisco primigenio exige Líder de la manada**. «Poder cambiante mejorado» no existe en el árbol final.",
+                "El árbol tiene **7 filas** (0/5/10/15/20/25/30 puntos). Lacerar exige Furia salvaje 2/2, Frenesí sangriento exige Garras afiladas 2/2 y Desgarrar y rasgar exige Golpes depredadores 3/3.",
+                "**Lacerar al 25** para tanquear con tus amigos desde las mazmorras de nivel 20 (igual que wowforeverprogress y Muchamiel; leprestore lo retrasa al 31).",
+                "**Disciplina depredadora al 26**: es el único camino a Poder cambiante. Method la coge en su build híbrida precisamente por eso.",
+                "**Corazón de lo Salvaje a partir del 42**: +20 % de aguante en oso (wowforeverprogress).",
+                "**Furor** se deja fuera: Method lo llama «talento muerto» tras moverlo a Feral.",
+                "Reparto final: **0 / 41 / 10 = 51 puntos**, comprobado nivel a nivel por un test."
               ]
+            },
+            {
+              "tipo": "aviso",
+              "estado": "orientativo",
+              "texto": "Las guías no coinciden en los niveles exactos (p. ej. Lacerar 25 vs 31, Carga feral 20 vs 32). El orden de esta ruta es una decisión propia para oso + gato; los requisitos del árbol sí están confirmados."
             }
           ]
         },
         {
           "titulo": "Variantes",
+          "icono": "talentos",
           "bloques": [
             {
               "tipo": "lista",
               "items": [
-                "**Más gato** (si casi nunca tanqueas): cambia Lacerar (25) por **Disciplina depredadora** y Reacción natural (49–50) por más puntos en Mejora de Poder cambiante o Cambiaformas natural.",
-                "**Más oso**: Reacción natural 5/5 al 35–39 en vez de Desgarrar y rasgar (pierdes daño de gato).",
-                "Ventaja de Legado **Talented**: permite tener puntos de talento hasta **5 niveles antes**."
+                "**Más gato** (si casi nunca tanqueas): cambia Reacción natural 5/5 por Ataques trituradores 3/3 + Impacto brutal 2/2.",
+                "**Oso puro de banda (0/46/5, wowforeverprogress):** Ferocidad 5, Furor 5, Presteza 2, Instinto feral 3, Pellejo 3, Trituradores 3, Furia salvaje 2, Carga 1, Garras 2, Golpes 3, Lacerar 1, Frenesí 2, Líder 1, Instinto natural 2, Desgarrar 5, Reacción natural 5, Mordisco 1 + Corazón de lo Salvaje 5. Renuncia a Poder cambiante.",
+                "**Method** desaconseja Reacción natural en bandas; wowforeverprogress la incluye. Para subir de nivel tanqueando, la ira extra ayuda.",
+                "Ventaja de Legado **Talented**: talentos hasta **5 niveles antes**."
               ]
             }
           ]
@@ -684,11 +685,12 @@
             {
               "tipo": "lista",
               "items": [
-                "**Furia del tigre** (Tiger's Fury): eliminada → la sustituye Poder cambiante.",
-                "**Rabiar** (Berserk): eliminado (3/11/2026); su hueco lo ocupa Mordisco primigenio.",
-                "**Fuego feérico (feral)**: el talento desaparece; **Fuego feérico** se puede lanzar en formas sin coste, TdR 6 s.",
+                "**Furia del tigre** (Tiger's Fury): eliminada; la sustituye Poder cambiante.",
+                "**Rabiar** (Berserk): eliminado; su hueco lo ocupa Mordisco primigenio.",
+                "**Poder cambiante mejorado**: no está en el árbol final (estaba en notas de la beta).",
+                "**Fuego feérico (feral)**: el talento desaparece; **Fuego feérico** se lanza en formas, gratis, TdR 6 s.",
                 "**Presagio de claridad**: habilidad base al 20.",
-                "**Lacerar**: talento feral (nv 25); rangos superiores en instructor al 34, 42, 50 y 58."
+                "**Lacerar**: talento (fila 4, nv 25); rangos 2–5 en el instructor a 34, 42, 50 y 58."
               ]
             }
           ]
@@ -726,14 +728,29 @@
           "bloques": [
             {
               "tipo": "lista",
+              "numerada": true,
               "items": [
-                "Entra con **Carga feral** o **Fuego feérico** (gratis en forma, TdR 6 s).",
-                "Amenaza: **Magullar** (Maul) + **Lacerar** hasta 5 acumulaciones; desde el 40 **Mordisco primigenio** (20 ira, amenaza muy alta).",
-                "**Bramido** (Growl) solo para recuperar un enemigo (TdR igual que Provocar de guerrero).",
-                "**Regeneración frenética**: cura el 100 % de la vida máxima con ira suficiente.",
-                "**Piel de corteza** (Barkskin) se puede usar en forma.",
-                "Druida **no tiene interrupción ni silencio**: usa Azote (Bash) y Pisotón de guerra como control."
+                "**Lacerar** si tiene 5 acumulaciones y le quedan ≤ 3 s.",
+                "**Fuego feérico** si el objetivo no tiene reducción de armadura (gratis en forma, TdR 6 s).",
+                "**Mordisco primigenio** cada vez que esté listo (TdR 6 s).",
+                "**Rugido desmoralizador** si falta la reducción de poder de ataque.",
+                "**Lacerar** como relleno hasta 5 acumulaciones.",
+                "**Magullar** con más de 35 de ira (sustituye al siguiente golpe blanco)."
               ]
+            },
+            {
+              "tipo": "lista",
+              "items": [
+                "Entrada: **Carga feral** o Magullar para amenaza inicial, luego Fuego feérico.",
+                "**Bramido** (Growl) para recuperar un enemigo (TdR 8 s).",
+                "Defensivos: **Piel de corteza** (usable en forma, −20 % daño, 15 s) y **Regeneración frenética** (nv 36).",
+                "Sin interrupción: **Azote** y **Pisotón de guerra** como control."
+              ]
+            },
+            {
+              "tipo": "aviso",
+              "estado": "confirmado",
+              "texto": "Amenaza de las formas de oso: **115 %** desde el lanzamiento (todas las guías coinciden). Prioridad según Method (4/11) y wowforeverprogress (15/11)."
             }
           ],
           "icono": "oso"
@@ -744,11 +761,10 @@
             {
               "tipo": "lista",
               "items": [
-                "Marca objetivo principal; agrupa a los enemigos frente a ti.",
-                "**Flagelo** (Swipe): golpea hasta 3 objetivos y escala con PA.",
-                "**Rugido desmoralizador**: ya incluye la mejora (≈ Grito desmoralizador de guerrero; igual al 60).",
-                "Reparte Lacerar en los peligrosos; Bramido al que va al sanador.",
-                "Pide al grupo que traiga a los sueltos hacia ti."
+                "2 objetivos: Fuego feérico → Mordisco primigenio → Rugido desmoralizador → Lacerar al principal → **Flagelo** de relleno → Magullar con > 35 de ira.",
+                "3 o más: Fuego feérico → Rugido desmoralizador → **Flagelo** (golpea 3) → Magullar con > 35 de ira.",
+                "Reparte Lacerar en los peligrosos; Bramido al que va a por el sanador.",
+                "Wowclassicforever avisa: un oso aguanta bien 3–4 enemigos a la vez; marca el resto para control."
               ]
             }
           ],
@@ -1070,14 +1086,20 @@
               "tipo": "tabla",
               "cabecera": ["Rol", "Prioridad (orientativa)"],
               "filas": [
-                ["Gato", "**DPS del arma** > poder de ataque > agilidad / fuerza > golpe / crítico > algo de intelecto"],
-                ["Oso", "Aguante > armadura > esquiva / agilidad > **DPS del arma** (amenaza) > resistencias situacionales"]
+                ["Gato", "**DPS del arma** > Fuerza > Golpe / Pericia > Crítico > Celeridad"],
+                ["Oso (defensa)", "**Aguante** y **Armadura** > Agilidad > Esquiva"],
+                ["Oso (amenaza)", "Igual que el gato: DPS del arma y Fuerza"]
               ]
             },
             {
               "tipo": "aviso",
               "estado": "confirmado",
-              "texto": "En Forever el **DPS del ataque automático en formas = DPS del arma equipada** (velocidad fija de 1,0 s o 2,5 s según forma). Encantamientos de arma y procs (Cruzado, Viento Furioso, piedras de peso) funcionan en forma. El arma SÍ importa."
+              "texto": "En forma, el golpe automático hace **DPS del arma × 2,5** y **14 de poder de ataque = 1 de DPS de arma** (Method). Encantamientos y procs funcionan en forma. El arma SÍ importa."
+            },
+            {
+              "tipo": "aviso",
+              "estado": "orientativo",
+              "texto": "Las guías discrepan: tope de golpe **8 %** (Method) o **9 %** (Muchamiel); armadura de Oso nefasto **×4,6** (Method) o **+360 %** (wowforeverprogress); Defensa **440** evita críticos de jefe (Muchamiel), sin verificar según wowforeverprogress."
             },
             {"tipo": "texto", "texto": "Lleva **2–3 piezas alternativas de aguante**, no dos equipos enteros mediocres."}
           ],
@@ -1194,27 +1216,47 @@
             },
             {
               "tipo": "aviso",
-              "estado": "orientativo",
-              "texto": "Misiones de forma: Icy Veins bloqueó el acceso automático. Oso al 10 y curar veneno al 14 se mantienen por misión de clase (orientativo); gato, viaje y oso nefasto: instructor (como en Classic) salvo que el juego indique cadena. Teletransporte: Claro de la Luna al 10 (referencia Classic)."
+              "estado": "confirmado",
+              "texto": "Misiones de forma confirmadas con la base de datos de Forever (NorgannonDB, 19/11/2026). Forma de viaje (30) y Oso nefasto (40): instructor, sin misión."
             }
           ],
           "icono": "sistemas"
         },
         {
-          "titulo": "Misiones de clase (orientativo)",
+          "titulo": "Misiones de clase (confirmadas)",
           "bloques": [
             {
               "tipo": "tabla",
               "cabecera": ["Nv", "Misión", "Recompensa"],
               "filas": [
-                ["10", "«Heeding the Call» (Poblado Pezuña de Sangre → Cima del Trueno → Claro de la Luna)", "Forma de oso"],
-                ["14", "«Lessons Anew» (Cima del Trueno)", "Curar veneno"],
-                ["16", "Cadena de forma acuática (Cima del Trueno → Claro de la Luna)", "Forma acuática"],
-                ["20", "Forma felina", "Instructor (o cadena si el juego la ofrece)"],
-                ["30 / 40", "Forma de viaje / Oso nefasto", "Instructor"]
+                [
+                  "10",
+                  "«Heeding the Call»: **Gennia Runetotem** (Pezuña de Sangre) → Turak Runetotem (Cima del Trueno) → Claro de la Luna «Great Bear Spirit» → «Body and Heart»",
+                  "Forma de oso"
+                ],
+                [
+                  "14",
+                  "«Lessons Anew» (Turak) → «The Principal Source» → **Tonga Runetotem** (Los Baldíos) «Gathering the Cure» / «Curing the Sick» → «Power over Poison»",
+                  "Curar veneno"
+                ],
+                [
+                  "16",
+                  "«A Lesson to Learn» (Turak) → Claro de la Luna «Trial of the Lake» / «Trial of the Sea Lion» (Tajarri) → «Aquatic Form»",
+                  "Forma acuática"
+                ],
+                [
+                  "20",
+                  "«The Great Cat Spirit» (Turak) → Gran Espíritu Felino (Claro de la Luna) → «To Thunder Bluff»",
+                  "Forma felina"
+                ],
+                ["30 / 40", "Forma de viaje / Oso nefasto", "Instructor"],
+                ["50", "«Torwa Pathfinder» (Turak) → cadena en Un'Goro", "Recompensa de clase"]
               ]
             },
-            {"tipo": "texto", "texto": "Prioridad: al 20 consigue el gato **antes** de seguir subiendo."}
+            {
+              "tipo": "texto",
+              "texto": "Todas aparecen en la pestaña **Misiones** con su mapa (busca la etiqueta [druida]). Al 20, consigue el gato **antes** de seguir subiendo."
+            }
           ],
           "icono": "sistemas"
         }

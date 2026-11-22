@@ -46,9 +46,26 @@ El progreso lo marcas tú a mano: el overlay no lee nada del juego.
 - **Barras**: un preset de teclas cada 5 niveles (10, 15… 60) para **Oso, Gato, Humanoide** y las teclas comunes (formas, viaje, Marca, Renacer). En verde lo nuevo respecto al tramo anterior. El tramo ACTUAL sigue a tu capítulo de la Ruta.
 - Datos en **`content/hechizos.json`**: `rangos` (nivel de cada rango), `omitir_desde` (a partir de qué nivel se deja de entrenar), `nunca`, `talento`, `origen: "mision"` y `nota`. Las barras se definen por tecla con una lista de candidatos: se usa el primero disponible a ese nivel. Si añades un hechizo, genera su icono con `python scripts/make_spell_icons.py`.
 
-## Imágenes
+## Misiones con mapa
 
-Los iconos (pestañas, zonas, oso y gato) y el banner son SVG propios, en `assets/icons/` y `assets/banner.svg`. No se usan imágenes de Blizzard. Para añadir tus propias imágenes (capturas de mapas, por ejemplo), cópialas en `content/img/` y añade este bloque en `guia_es.json`:
+- Pestaña **Misiones**: las **2.527 misiones** que puede aceptar un tauren druida, agrupadas por **nivel mínimo para aceptarlas** (1–60). Cada nivel es una sección plegable; empiezan todas plegadas y el nivel ACTUAL sigue a tu capítulo de la Ruta.
+- Clic en una misión: aparece el **mapa real de la zona** con **!** amarillo donde se coge y **?** azul donde se entrega, más quién la da, coordenadas, misiones previas y un enlace a Wowhead. Las misiones de clase llevan la etiqueta **[druida]**.
+- Casillas ☐ para marcar las que completes (se guardan con el resto del progreso).
+- Datos: [NorgannonDB](https://github.com/zmarotrix/NorgannonDB) (Forever 1.60.1, GPL-3.0). Filtro: raza tauren + clase druida; se excluyen eventos (Luna Negra, esfuerzo de guerra, invasión de la Plaga, «Craftsman's Writ», insignias).
+
+## Recursos de Blizzard (uso personal)
+
+Los **iconos de hechizos** y los **mapas de zona** son los reales de Blizzard, descargados del CDN de Wowhead, y las misiones salen de NorgannonDB. **No están en el repositorio** (ver `.gitignore`): se descargan en tu equipo con
+
+```
+.venv\Scripts\python scripts\fetch_blizzard_assets.py
+```
+
+(`scripts\build_windows.bat` lo hace solo; `--update` actualiza la base de datos de misiones). Se guardan en `assets/blizzard/`, `data/` y `vendor/` y se meten dentro de tu `.exe`. Si faltan, la app usa iconos propios de respaldo y la pestaña Misiones explica cómo descargarlos.
+
+## Imágenes propias
+
+Los iconos de pestañas y zonas y el banner son SVG propios, en `assets/icons/` y `assets/banner.svg`. Para añadir tus propias imágenes (capturas de mapas, por ejemplo), cópialas en `content/img/` y añade este bloque en `guia_es.json`:
 
 ```json
 {"tipo": "imagen", "archivo": "img/mapa_baldios.png", "ancho": 300, "pie": "Ruta por Los Baldíos"}
@@ -81,7 +98,9 @@ src/spells.py          qué entrenar en cada nivel y presets de barras
 src/ui/render.py       JSON → HTML compacto · src/ui/theme.py  estilos
 assets/icons/          iconos SVG propios · assets/banner.svg
 content/               guía y fuentes (editables)
-tests/                 51 tests (contenido, talentos, progreso, estado, ventana real)
+src/quests.py          pestaña Misiones (data/misiones_horda.json)
+scripts/fetch_blizzard_assets.py  descarga iconos, mapas y NorgannonDB; build_quests.py genera las misiones
+tests/                 59 tests (contenido, talentos, progreso, hechizos, misiones, estado, ventana real)
 docs/VALIDACION.md     correcciones al borrador y fuentes revisadas
 ```
 
