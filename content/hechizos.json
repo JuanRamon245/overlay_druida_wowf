@@ -1,0 +1,94 @@
+{
+  "validado_con": "Niveles de rango del instructor (base Classic) con los cambios de Forever confirmados por la base de datos NorgannonDB y las guías de nov. 2026 (formas por misión al 10/14/16/20, Revivir al 12, Regeneración frenética al 36, Lacerar talento con rangos 34/42/50/58, Mordisco primigenio 50/60). Qué entrenar o ignorar es una recomendación feral. Iconos reales de Wowhead Forever.",
+  "grupos": [
+    ["oso", "Oso"],
+    ["gato", "Gato"],
+    ["equilibrio", "Humanoide · equilibrio"],
+    ["restauracion", "Humanoide · restauración"],
+    ["utilidad", "Formas y utilidad"]
+  ],
+  "hechizos": {
+    "bear_form":      {"es": "Forma de oso", "corto": "Oso", "en": "Bear Form", "icono_wow": "ability_racial_bearform", "grupo": "oso", "glifo": "bear", "rangos": [10], "origen": "mision"},
+    "growl":          {"es": "Gruñido", "en": "Growl", "icono_wow": "ability_physical_taunt", "grupo": "oso", "glifo": "roar", "rangos": [10]},
+    "maul":           {"es": "Magullar", "en": "Maul", "icono_wow": "ability_druid_maul", "grupo": "oso", "glifo": "maul", "rangos": [10, 18, 26, 34, 42, 50, 58]},
+    "demo_roar":      {"es": "Rugido desmoralizador", "corto": "Rugido desm.", "en": "Demoralizing Roar", "icono_wow": "ability_druid_demoralizingroar", "grupo": "oso", "glifo": "roar_down", "rangos": [10, 20, 32, 42, 52]},
+    "enrage":         {"es": "Enfurecer", "en": "Enrage", "icono_wow": "ability_druid_enrage", "grupo": "oso", "glifo": "flame", "rangos": [12]},
+    "bash":           {"es": "Azote", "en": "Bash", "icono_wow": "ability_druid_bash", "grupo": "oso", "glifo": "impact", "rangos": [14, 30, 46]},
+    "swipe":          {"es": "Flagelo", "en": "Swipe", "icono_wow": "inv_misc_monsterclaw_03", "grupo": "oso", "glifo": "swipe", "rangos": [16, 24, 34, 44, 54]},
+    "frenzied":       {"es": "Regeneración frenética", "corto": "Regen. fren.", "en": "Frenzied Regeneration", "icono_wow": "ability_bullrush", "grupo": "oso", "glifo": "heart_plus", "rangos": [36, 46, 56]},
+    "dire_bear":      {"es": "Forma de oso nefasto", "corto": "Oso nefasto", "en": "Dire Bear Form", "icono_wow": "ability_racial_bearform", "grupo": "oso", "glifo": "dire_bear", "rangos": [40]},
+    "feral_charge":   {"es": "Carga feral", "en": "Feral Charge", "icono_wow": "ability_hunter_pet_bear", "grupo": "oso", "glifo": "charge", "rangos": [20], "talento": true},
+    "lacerate":       {"es": "Lacerar", "en": "Lacerate", "icono_wow": "ability_druid_lacerate", "grupo": "oso", "glifo": "lacerate", "rangos": [25, 34, 42, 50, 58], "talento": true},
+    "primal_bite":    {"es": "Mordisco primigenio", "corto": "Mordisco", "en": "Primal Bite", "icono_wow": "ability_racial_cannibalize", "grupo": "oso", "glifo": "jaw", "rangos": [40, 50, 60], "talento": true},
+
+    "cat_form":       {"es": "Forma felina", "corto": "Gato", "en": "Cat Form", "icono_wow": "ability_druid_catform", "grupo": "gato", "glifo": "cat", "rangos": [20], "origen": "mision"},
+    "claw":           {"es": "Zarpa", "en": "Claw", "icono_wow": "ability_druid_rake", "grupo": "gato", "glifo": "claw", "rangos": [20, 28, 38, 48, 58]},
+    "prowl":          {"es": "Acechar", "en": "Prowl", "icono_wow": "ability_ambush", "grupo": "gato", "glifo": "prowl", "rangos": [20, 40, 60]},
+    "rip":            {"es": "Destripar", "en": "Rip", "icono_wow": "ability_ghoulfrenzy", "grupo": "gato", "glifo": "rip", "rangos": [20, 28, 36, 44, 52, 60]},
+    "shred":          {"es": "Triturar", "en": "Shred", "icono_wow": "spell_shadow_vampiricaura", "grupo": "gato", "glifo": "shred", "rangos": [22, 30, 38, 46, 54]},
+    "rake":           {"es": "Arañazo", "en": "Rake", "icono_wow": "ability_druid_disembowel", "grupo": "gato", "glifo": "rake", "rangos": [24, 34, 44, 54]},
+    "dash":           {"es": "Carrerilla", "en": "Dash", "icono_wow": "ability_druid_dash", "grupo": "gato", "glifo": "speed", "rangos": [26, 46]},
+    "cower":          {"es": "Agazaparse", "en": "Cower", "icono_wow": "ability_druid_cower", "grupo": "gato", "glifo": "cower", "rangos": [28, 40, 52], "nota": "Útil en grupo para soltar amenaza."},
+    "ferocious_bite": {"es": "Mordedura feroz", "corto": "Mordedura f.", "en": "Ferocious Bite", "icono_wow": "ability_druid_ferociousbite", "grupo": "gato", "glifo": "bite", "rangos": [32, 40, 48, 56]},
+    "ravage":         {"es": "Devastar", "en": "Ravage", "icono_wow": "ability_druid_ravage", "grupo": "gato", "glifo": "ravage", "rangos": [32, 42, 50, 58], "nota": "Abridor desde sigilo por la espalda."},
+    "track_humanoids":{"es": "Rastrear humanoides", "corto": "Rastrear hum.", "en": "Track Humanoids", "icono_wow": "ability_tracking", "grupo": "gato", "glifo": "track", "rangos": [32]},
+    "pounce":         {"es": "Abalanzarse", "en": "Pounce", "icono_wow": "ability_druid_supriseattack", "grupo": "gato", "glifo": "pounce", "rangos": [36, 46, 56], "nunca": true, "nota": "Aturdimiento de apertura: útil en JcJ, prescindible al subir de nivel."},
+    "shifting_power": {"es": "Poder cambiante", "corto": "Poder camb.", "en": "Shifting Power", "icono_wow": "spell_druid_displacement", "grupo": "gato", "glifo": "bolt", "rangos": [41], "talento": true},
+
+    "wrath":          {"es": "Cólera", "en": "Wrath", "icono_wow": "spell_nature_abolishmagic", "grupo": "equilibrio", "glifo": "sun", "rangos": [1, 6, 14, 22, 30, 38, 46, 54], "omitir_desde": 14, "nota": "Solo para tirar desde lejos antes del gato; dos rangos bastan."},
+    "moonfire":       {"es": "Fuego lunar", "en": "Moonfire", "icono_wow": "spell_nature_starfall", "grupo": "equilibrio", "glifo": "moon", "rangos": [4, 10, 16, 22, 28, 34, 40, 46, 52, 58], "omitir_desde": 16, "nota": "Un rango bajo sirve para tirar o rematar a quien huye."},
+    "roots":          {"es": "Raíces enredadoras", "corto": "Raíces", "en": "Entangling Roots", "icono_wow": "spell_nature_stranglevines", "grupo": "equilibrio", "glifo": "root", "rangos": [8, 18, 28, 38, 48, 58], "nota": "Tu mejor control en exteriores (el druida no tiene interrupción)."},
+    "thorns":         {"es": "Espinas", "en": "Thorns", "icono_wow": "spell_nature_thorns", "grupo": "equilibrio", "glifo": "thorns", "rangos": [6, 14, 24, 34, 44, 54]},
+    "natures_grasp":  {"es": "Garras de la naturaleza", "corto": "Garras nat.", "en": "Nature's Grasp", "icono_wow": "spell_nature_natureswrath", "grupo": "equilibrio", "glifo": "grasp", "rangos": [10, 18, 28, 38, 48, 58], "nota": "Base al 10 en Forever, usable en forma; rangos superiores orientativos."},
+    "faerie_fire":    {"es": "Fuego feérico", "en": "Faerie Fire", "icono_wow": "spell_nature_faeriefire", "grupo": "equilibrio", "glifo": "sparkle", "rangos": [18, 30, 42, 54], "nota": "En Forever se lanza en formas, sin coste, TdR 6 s."},
+    "hibernate":      {"es": "Hibernar", "en": "Hibernate", "icono_wow": "spell_nature_sleep", "grupo": "equilibrio", "glifo": "zzz", "rangos": [18, 38, 58], "omitir_desde": 38, "nota": "Rango 1 basta para controlar bestias y dragonantes en mazmorras."},
+    "starfire":       {"es": "Fuego estelar", "en": "Starfire", "icono_wow": "spell_arcane_starfire", "grupo": "equilibrio", "glifo": "star", "rangos": [20, 26, 34, 42, 50, 58], "nunca": true, "nota": "Hechizo de equilibrio con tiempo de lanzamiento: no lo usarás en feral."},
+    "soothe":         {"es": "Calmar animal", "en": "Soothe Animal", "icono_wow": "ability_hunter_beastsoothe", "grupo": "equilibrio", "glifo": "soothe", "rangos": [22, 36, 50], "nunca": true, "nota": "Situacional; casi nadie lo entrena al subir."},
+    "hurricane":      {"es": "Huracán", "en": "Hurricane", "icono_wow": "spell_nature_cyclone", "grupo": "equilibrio", "glifo": "tornado", "rangos": [40, 50, 60], "nunca": true, "nota": "Área de lanzador: no encaja en feral."},
+    "barkskin":       {"es": "Piel de corteza", "corto": "Piel corteza", "en": "Barkskin", "icono_wow": "spell_nature_stoneclawtotem", "grupo": "equilibrio", "glifo": "shield", "rangos": [44], "nota": "En Forever se usa en forma: defensivo de tanque."},
+
+    "healing_touch":  {"es": "Toque de sanación", "corto": "Toque sanación", "en": "Healing Touch", "icono_wow": "spell_nature_healingtouch", "grupo": "restauracion", "glifo": "heart", "rangos": [1, 8, 14, 20, 26, 32, 38, 44, 50, 56], "omitir_desde": 26, "nota": "Recrecimiento (más barato en Forever) cubre las curas entre combates."},
+    "motw":           {"es": "Marca de lo Salvaje", "corto": "Marca Salvaje", "en": "Mark of the Wild", "icono_wow": "spell_nature_regeneration", "grupo": "restauracion", "glifo": "paw", "rangos": [1, 10, 20, 30, 40, 50, 60]},
+    "rejuv":          {"es": "Rejuvenecimiento", "corto": "Rejuvenecer", "en": "Rejuvenation", "icono_wow": "spell_nature_rejuvenation", "grupo": "restauracion", "glifo": "drop", "rangos": [4, 10, 16, 22, 28, 34, 40, 46, 52, 58]},
+    "regrowth":       {"es": "Recrecimiento", "corto": "Recrecim.", "en": "Regrowth", "icono_wow": "spell_nature_resistnature", "grupo": "restauracion", "glifo": "leaf", "rangos": [12, 18, 24, 30, 36, 42, 48, 54, 60]},
+    "revive":         {"es": "Revivir", "en": "Revive", "icono_wow": "ability_druid_lunarguidance", "grupo": "restauracion", "glifo": "ankh", "rangos": [12], "nota": "Nuevo en Forever: resurrección fuera de combate."},
+    "cure_poison":    {"es": "Curar veneno", "en": "Cure Poison", "icono_wow": "spell_nature_nullifypoison", "grupo": "restauracion", "glifo": "cross", "rangos": [14], "origen": "mision"},
+    "rebirth":        {"es": "Renacer", "en": "Rebirth", "icono_wow": "spell_nature_reincarnation", "grupo": "restauracion", "glifo": "rebirth", "rangos": [20, 30, 40, 50, 60]},
+    "remove_curse":   {"es": "Eliminar maldición", "corto": "Elim. maldición", "en": "Remove Curse", "icono_wow": "spell_holy_removecurse", "grupo": "restauracion", "glifo": "curse", "rangos": [24]},
+    "abolish_poison": {"es": "Suprimir veneno", "en": "Abolish Poison", "icono_wow": "spell_nature_nullifypoison_02", "grupo": "restauracion", "glifo": "cross_circle", "rangos": [26]},
+    "tranquility":    {"es": "Tranquilidad", "en": "Tranquility", "icono_wow": "spell_nature_tranquility", "grupo": "restauracion", "glifo": "lotus", "rangos": [30, 40, 50, 60], "nunca": true, "nota": "Cura canalizada de grupo para sanadores."},
+    "innervate":      {"es": "Estimular", "en": "Innervate", "icono_wow": "spell_nature_lightning", "grupo": "restauracion", "glifo": "bolt", "rangos": [40]},
+    "gotw":           {"es": "Don de lo Salvaje", "corto": "Don Salvaje", "en": "Gift of the Wild", "icono_wow": "spell_nature_regeneration", "grupo": "restauracion", "glifo": "paw_double", "rangos": [50, 60]},
+
+    "teleport_moonglade": {"es": "Teletransporte: Claro de la Luna", "corto": "Tele. Claro Luna", "en": "Teleport: Moonglade", "icono_wow": "spell_arcane_teleportmoonglade", "grupo": "utilidad", "glifo": "portal", "rangos": [10]},
+    "aquatic":        {"es": "Forma acuática", "corto": "Acuática", "en": "Aquatic Form", "icono_wow": "ability_druid_aquaticform", "grupo": "utilidad", "glifo": "wave", "rangos": [16], "origen": "mision"},
+    "omen":           {"es": "Presagio de claridad", "corto": "Presagio", "en": "Omen of Clarity", "icono_wow": "spell_nature_crystalball", "grupo": "utilidad", "glifo": "omen", "rangos": [20], "nota": "Habilidad base en Forever: mantenlo siempre activo."},
+    "travel":         {"es": "Forma de viaje", "corto": "Viaje", "en": "Travel Form", "icono_wow": "ability_druid_travelform", "grupo": "utilidad", "glifo": "travel", "rangos": [30]}
+  },
+  "barras": {
+    "nota": "Disposición habitual que recomienda la comunidad feral (cada forma cambia la barra principal). Es una propuesta orientativa: adáptala a tus teclas.",
+    "niveles": [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60],
+    "comunes": [
+      ["Q", ["dire_bear", "bear_form"]],
+      ["E", ["cat_form"]],
+      ["V", ["travel", "aquatic"]],
+      ["Mayús+V", ["aquatic"]],
+      ["B", ["gotw", "motw"]],
+      ["Mayús+R", ["rebirth"]]
+    ],
+    "formas": [
+      {"nombre": "Oso", "icono": "bear_form", "desde": 10, "teclas": [
+        ["1", ["maul"]], ["2", ["lacerate"]], ["3", ["swipe"]], ["4", ["bash"]], ["5", ["demo_roar"]], ["6", ["primal_bite"]],
+        ["R", ["growl"]], ["F", ["feral_charge"]], ["T", ["faerie_fire"]], ["C", ["barkskin"]], ["Z", ["frenzied"]], ["X", ["enrage"]]
+      ]},
+      {"nombre": "Gato", "icono": "cat_form", "desde": 20, "teclas": [
+        ["1", ["claw"]], ["2", ["shred"]], ["3", ["rake"]], ["4", ["rip"]], ["5", ["ferocious_bite"]], ["6", ["shifting_power"]],
+        ["R", ["prowl"]], ["F", ["feral_charge"]], ["T", ["faerie_fire"]], ["C", ["dash"]], ["Z", ["cower"]], ["X", ["ravage"]]
+      ]},
+      {"nombre": "Humanoide", "icono": "motw", "desde": 1, "teclas": [
+        ["1", ["wrath"]], ["2", ["moonfire"]], ["3", ["roots"]], ["4", ["regrowth", "healing_touch"]], ["5", ["rejuv"]], ["6", ["healing_touch"]],
+        ["R", ["hibernate"]], ["F", ["natures_grasp"]], ["T", ["thorns"]], ["C", ["barkskin"]], ["Z", ["innervate"]], ["X", ["remove_curse"]]
+      ]}
+    ]
+  }
+}

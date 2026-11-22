@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+build/
+dist/
+*.spec
+assets/icon.ico
+
+# Recursos de Blizzard y datos descargados: solo para uso personal, no se publican
+vendor/
+data/
+assets/blizzard/
